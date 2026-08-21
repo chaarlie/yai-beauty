@@ -1,26 +1,164 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---------------------------------------------------------------------------
+   Design tokens — from the handoff "Design tokens" section.
+   Two background colors for the whole page (cream + blush-50) plus the dark
+   promo block. Hold that line.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #1a1614;
+  --color-ink-raised: #241d1a;
+  --color-cream: #fbf3ee;
+  --color-blush-50: #f3e3da;
+  --color-blush-300: #e8cfc4;
+  --color-clay: #b98a80;
+  --color-clay-600: #c9a79a;
+  --color-secondary: #4a3f39;
+  --color-tertiary: #5a4c45;
+  --color-muted: #8a756a;
+  --color-eyebrow: #a08574;
+  --color-photo-caption: #8a6a5c;
+
+  /* Rules — low-alpha ink on light, low-alpha cream on dark. */
+  --color-rule: rgb(26 22 20 / 0.12);
+  --color-rule-stat: rgb(26 22 20 / 0.14);
+  --color-rule-button: rgb(26 22 20 / 0.25);
+  --color-rule-dark: rgb(251 243 238 / 0.16);
+
+  /* Text on dark, per the handoff's alpha ladder. */
+  --color-on-dark-body: rgb(251 243 238 / 0.82);
+  --color-on-dark-intro: rgb(251 243 238 / 0.7);
+  --color-on-dark-caption: rgb(251 243 238 / 0.55);
+  --color-on-dark-label: rgb(251 243 238 / 0.5);
+  --color-on-dark-field: rgb(251 243 238 / 0.3);
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-jost), Jost, Helvetica, sans-serif;
+
+  /* Header collapses to a hamburger below 900px (handoff "Responsive"). */
+  --breakpoint-nav: 900px;
+
+  /* Border radius 0 everywhere; no shadows. This is load-bearing to the
+     editorial feel, so the scales are removed rather than merely unused —
+     `rounded-lg` / `shadow-md` will not compile. */
+  --radius-*: initial;
+  --shadow-*: initial;
+  --drop-shadow-*: initial;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 120ms ease;
+  }
+
+  a:hover {
+    color: var(--color-clay);
+  }
+
+  ::selection {
+    background: var(--color-blush-300);
+  }
+
+  /* The prototype has no focus style at all — a known a11y gap in the mock,
+     called out in the handoff. Restore one everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--color-clay);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------------------------------------------------------------------------
+   Type roles — from the handoff "Typography" table.
+   Wide letter-spacing on small uppercase text is the signature of this design.
+   Defining the roles once keeps it from being normalized away piecemeal.
+--------------------------------------------------------------------------- */
+@layer components {
+  .t-eyebrow {
+    font: 400 12px/1 var(--font-sans);
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--color-eyebrow);
+  }
+
+  .t-label {
+    font: 400 11px/1.6 var(--font-sans);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .t-label-wide {
+    font: 400 11px/1 var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .t-nav {
+    font: 400 13px/1 var(--font-sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .t-button {
+    font: 400 13px/1 var(--font-sans);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .t-button-sm {
+    font: 400 12px/1 var(--font-sans);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .t-chip {
+    font: 400 11px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-photo-caption);
+  }
+
+  /* Section rhythm. Horizontal padding is 64px at the 1440px canvas width and
+     steps down on smaller viewports, which the prototype never designed. */
+  .section-x {
+    padding-inline: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .section-x {
+      padding-inline: 40px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-x {
+      padding-inline: 64px;
+    }
+  }
 }

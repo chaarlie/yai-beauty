@@ -1,0 +1,248 @@
+{
+  "$comment": "Source: Yai Beauty Esthetic price list PDF (Spanish original). Prices in DOP, per session. en names are translations for the site's EN locale.",
+  "currency": "DOP",
+  "priceDisplay": "RD$",
+  "categories": [
+    {
+      "id": "facial",
+      "es": "Facial",
+      "en": "Facial"
+    },
+    {
+      "id": "corporal",
+      "es": "Corporal",
+      "en": "Body"
+    },
+    {
+      "id": "depilacion",
+      "es": "Depilación",
+      "en": "Hair removal"
+    },
+    {
+      "id": "cejas-pestanas",
+      "es": "Cejas y pestañas",
+      "en": "Brows & lashes"
+    }
+  ],
+  "services": [
+    {
+      "slug": "facial-profundo",
+      "category": "facial",
+      "es": "Tratamiento facial profundo",
+      "en": "Deep facial treatment",
+      "price": 2000,
+      "featured": true
+    },
+    {
+      "slug": "acne",
+      "category": "facial",
+      "es": "Tratamiento para acné",
+      "en": "Acne treatment",
+      "price": 3800,
+      "featured": true
+    },
+    {
+      "slug": "manchas",
+      "category": "facial",
+      "es": "Tratamiento para manchas",
+      "en": "Dark spot / melasma treatment",
+      "price": 4000,
+      "featured": true
+    },
+    {
+      "slug": "piel-madura",
+      "category": "facial",
+      "es": "Tratamiento piel madura",
+      "en": "Mature skin treatment",
+      "price": 3500
+    },
+    {
+      "slug": "hidratacion-labios",
+      "category": "facial",
+      "es": "Hidratación de labios",
+      "en": "Lip hydration",
+      "price": 2000
+    },
+    {
+      "slug": "retiro-verrugas",
+      "category": "facial",
+      "es": "Retiro de verrugas",
+      "en": "Skin tag removal",
+      "price": 2000,
+      "display": {
+        "es": "Retiro de verrugas (Acrocordones)",
+        "en": "Skin tag removal (acrochordons)"
+      }
+    },
+    {
+      "slug": "exfoliacion-corporal",
+      "category": "corporal",
+      "es": "Exfoliación e hidratación corporal",
+      "en": "Body exfoliation & hydration",
+      "price": 3000,
+      "display": {
+        "es": "Exfoliación e hidratación corporal",
+        "en": "Body exfoliation & hydration"
+      }
+    },
+    {
+      "slug": "espalda",
+      "category": "corporal",
+      "es": "Tratamiento para espalda",
+      "en": "Back treatment",
+      "price": 4300,
+      "featured": true
+    },
+    {
+      "slug": "gluteos",
+      "category": "corporal",
+      "es": "Tratamiento para glúteos",
+      "en": "Summer glute treatment",
+      "price": 4500,
+      "display": {
+        "es": "Tratamiento para glúteos de verano",
+        "en": "Summer glute treatment"
+      },
+      "featured": true
+    },
+    {
+      "slug": "vajacial",
+      "category": "corporal",
+      "es": "Vajacial (tratamiento íntimo)",
+      "en": "Vajacial (intimate treatment)",
+      "price": 4000
+    },
+    {
+      "slug": "axilas-tratamiento",
+      "category": "corporal",
+      "es": "Tratamiento axilas",
+      "en": "Underarm treatment",
+      "price": 1800
+    },
+    {
+      "slug": "masaje-relajante",
+      "category": "corporal",
+      "es": "Masaje relajante (solo mujer)",
+      "en": "Relaxing massage (women only)",
+      "price": 1500,
+      "note": {
+        "es": "Solo mujeres",
+        "en": "Women only"
+      }
+    },
+    {
+      "slug": "depilacion-piernas",
+      "category": "depilacion",
+      "es": "Depilación piernas",
+      "en": "Leg hair removal",
+      "price": 1300,
+      "display": {
+        "es": "Depilación piernas de verano",
+        "en": "Summer-ready legs"
+      }
+    },
+    {
+      "slug": "depilacion-bikini",
+      "category": "depilacion",
+      "es": "Depilación bikini",
+      "en": "Bikini hair removal",
+      "price": 1500,
+      "display": {
+        "es": "Luce el bikini libre de vellos",
+        "en": "Bikini-ready, hair-free"
+      }
+    },
+    {
+      "slug": "depilacion-axilas",
+      "category": "depilacion",
+      "es": "Depilación axilas",
+      "en": "Underarm hair removal",
+      "price": 500,
+      "display": {
+        "es": "Muestra tus axilas con confianza",
+        "en": "Underarms you can raise with confidence"
+      }
+    },
+    {
+      "slug": "depilacion-labio-superior",
+      "category": "depilacion",
+      "es": "Depilación labio superior",
+      "en": "Upper lip hair removal",
+      "price": 200
+    },
+    {
+      "slug": "cejas",
+      "category": "cejas-pestanas",
+      "es": "Estilismo, epilación y color de cejas",
+      "en": "Brow styling, wax & tint",
+      "price": 500
+    },
+    {
+      "slug": "extensiones-pestanas",
+      "category": "cejas-pestanas",
+      "es": "Extensiones de pestañas",
+      "en": "Lash extensions",
+      "price": 600
+    },
+    {
+      "slug": "laminado-cejas",
+      "category": "cejas-pestanas",
+      "es": "Laminado de cejas",
+      "en": "Brow lamination",
+      "price": 800,
+      "featured": true
+    }
+  ],
+  "promo": {
+    "$comment": "UNCONFIRMED — mechanic wording and end date are placeholders pending Yai's real terms.",
+    "active": true,
+    "label": {
+      "es": "Especial del mes",
+      "en": "Special of the month"
+    },
+    "title": {
+      "es": "Trae 3 clientes y recibe un facial profundo gratis",
+      "en": "Bring 3 clients and your deep facial is on us"
+    },
+    "body": {
+      "es": "Cada amiga que reserve y complete su primer tratamiento cuenta para tu sesión gratis. Tu progreso no expira.",
+      "en": "Each friend who books and completes her first treatment counts toward your free session. No expiry on your progress."
+    },
+    "steps": [
+      {
+        "es": "Envíale tus amigas a Yai por WhatsApp",
+        "en": "Send your friends to Yai on WhatsApp"
+      },
+      {
+        "es": "Ellas mencionan tu nombre al reservar",
+        "en": "They mention your name when booking"
+      },
+      {
+        "es": "Después de la tercera, tu facial profundo es gratis",
+        "en": "After the third, your deep facial is free"
+      }
+    ],
+    "rewardService": "facial-profundo",
+    "valueDOP": 2000,
+    "validThrough": "2026-08-31"
+  },
+  "business": {
+    "name": "Yai Beauty Esthetic",
+    "phone": "+18099616156",
+    "phoneDisplay": "809-961-6156",
+    "whatsapp": "https://wa.me/18099616156",
+    "email": "Jasmeiling97@gmail.com",
+    "instagram": "@YaiBeauty",
+    "instagramUrl": "https://instagram.com/yaibeauty",
+    "address": {
+      "street": "Calle Minerva Arobal, Sosúa 61",
+      "building": "Batey Rizz Suites",
+      "city": "Sosúa",
+      "country": "Dominican Republic"
+    },
+    "yearsExperience": 7,
+    "appointmentOnly": true,
+    "freeEvaluation": true
+  },
+  "$imageNote": "Featured treatments render a photo when `image` is set to a path under /public (e.g. /treatments/acne.jpg); without it the labelled placeholder renders instead."
+}

@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "title": "Yai Beauty Esthetic — Esthetics studio in Sosúa",
+    "description": "Personalized facial and body treatments in Sosúa, Dominican Republic. Every visit begins with a free skin evaluation. By appointment only."
+  },
+  "nav": {
+    "services": "Services",
+    "offers": "Offers",
+    "prices": "Prices",
+    "results": "Results",
+    "about": "About",
+    "contact": "Contact",
+    "mainNav": "Main navigation",
+    "book": "Book",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "toggleLang": "Switch to Spanish"
+  },
+  "hero": {
+    "eyebrow": "Sosúa, Dominican Republic",
+    "title": "Your skin, your perfect frame",
+    "body": "Personalized facial and body treatments. Every visit begins with a free skin evaluation — the plan is built from what we find.",
+    "primaryCta": "WhatsApp Yai",
+    "secondaryCta": "See treatments",
+    "prefill": "Hi Yai, I'd like information about your treatments.",
+    "photoLabel": "photo — portrait / treatment room",
+    "stats": {
+      "yearsValue": "7+",
+      "yearsLabel": "Years of experience",
+      "treatmentsLabel": "Treatments offered",
+      "evaluationValue": "Free",
+      "evaluationLabel": "Initial evaluation"
+    }
+  },
+  "promo": {
+    "validThrough": "Valid through August 2026",
+    "heading": "Referral offer",
+    "badge": "Free facial",
+    "cta": "Claim the offer",
+    "caption": "Mention the offer when you book",
+    "value": "Value",
+    "prefill": "Hi Yai, I'd like to join the referral offer."
+  },
+  "treatments": {
+    "heading": "Treatments",
+    "intro": "Facials, body care, hair removal, brows and lashes — all by appointment only.",
+    "allHeading": "All treatments",
+    "cta": "Book this treatment",
+    "ctaPrefill": "Hi Yai, I'm interested in this treatment: "
+  },
+  "results": {
+    "heading": "Results",
+    "caption": "Real clients, with permission",
+    "photos": [
+      "before / after — acne",
+      "before / after — dark spots",
+      "brows — lamination",
+      "lashes — extensions"
+    ]
+  },
+  "about": {
+    "eyebrow": "About",
+    "heading": "Beauty, knowledge and personalized care",
+    "intro": [
+      "I'm Yasmín, a cosmiatrist and esthetics professional, and since 2019 I have devoted my training and experience to skin care.",
+      "Over the course of my career I have worked in several esthetics studios in Santo Domingo, gaining hands-on experience and developing a way of working grounded in knowledge, in observation and, above all, in the real needs of each skin.",
+      "Today, at 28, my passion for esthetics is still an essential part of my life. For me, working with skin is not simply about performing a treatment; it is about listening to each person's concerns, understanding their skin, and supporting them in the process of achieving healthier, better-cared-for skin."
+    ],
+    "sections": [
+      {
+        "heading": "A treatment begins with an evaluation",
+        "body": [
+          "At Yai Beauty Esthetic we believe every skin is different — which is why not every treatment should be the same.",
+          "When a client arrives at the studio, the first step is getting to know her skin. We carry out a visual and tactile evaluation, looking at texture, sensitivity, hydration, oiliness, congestion, changes in pigmentation and any other characteristic that could affect the treatment.",
+          "We also complete a clinical record, to better understand the skin's needs and any relevant history.",
+          "From that evaluation we can determine which treatment is the most appropriate, which products to use, and which care to avoid or adjust in order to respect the particular condition of each skin.",
+          "Our aim is for every treatment to be personalized and carried out with professional judgement — not simply the same protocol applied to everyone."
+        ]
+      },
+      {
+        "heading": "Results are built as a team",
+        "body": [
+          "We believe skin care is teamwork.",
+          "The treatment carried out in the studio is an important part of the process, but care at home matters just as much. That is why, after every treatment, we guide our clients on the products and habits that help maintain and improve their results at home.",
+          "Consistency, habits and the client's own commitment are essential.",
+          "Because real change does not happen in a single hour in the treatment room: it is built through continuous care of the skin."
+        ]
+      },
+      {
+        "heading": "What I find most rewarding: seeing the process",
+        "body": [
+          "One of the things I am most passionate about in my profession is being able to watch a skin evolve.",
+          "Behind every before and after there is a person who arrived with a concern, an insecurity, or simply the wish to take better care of herself.",
+          "For me, the most rewarding part is being able to walk with her, explain what her skin needs, and work together toward visible, healthy progress.",
+          "At Yai Beauty Esthetic every skin has a story, and every treatment begins by listening to that story."
+        ]
+      }
+    ],
+    "closing": "Your skin does not simply need a treatment. It needs to be understood, evaluated and cared for in a personalized way.",
+    "photoLabel": "photo — Yai at work"
+  },
+  "faq": {
+    "heading": "Before your visit",
+    "items": [
+      {
+        "q": "Do I need an appointment?",
+        "a": "Yes — appointments only, so each session gets its full time."
+      },
+      {
+        "q": "Is the evaluation really free?",
+        "a": "Yes. We assess your skin at the visit and build the plan from there."
+      },
+      {
+        "q": "How should I prepare?",
+        "a": "Come without makeup when possible, and avoid sun exposure 48h before facial treatments."
+      }
+    ]
+  },
+  "form": {
+    "heading": "Request your appointment",
+    "intro": "Send it and Yai replies on WhatsApp to confirm day and time.",
+    "name": "Name",
+    "phone": "WhatsApp",
+    "treatment": "Treatment of interest",
+    "message": "Tell me about your skin",
+    "submit": "Send request",
+    "errorName": "Please enter your name.",
+    "errorPhone": "Please enter a valid WhatsApp number.",
+    "opening": "Opening WhatsApp…",
+    "prefillIntro": "Hi Yai, I'd like to request an appointment.",
+    "prefillName": "Name",
+    "prefillPhone": "WhatsApp",
+    "prefillTreatment": "Treatment",
+    "prefillMessage": "Note"
+  },
+  "footer": {
+    "phoneLabel": "Call or message on WhatsApp",
+    "emailLabel": "Send an email",
+    "instagramLabel": "Instagram"
+  },
+  "mobileBar": {
+    "cta": "Message Yai on WhatsApp"
+  }
+}

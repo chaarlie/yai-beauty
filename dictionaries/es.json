@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "title": "Yai Beauty Esthetic — Estudio de estética en Sosúa",
+    "description": "Tratamientos faciales y corporales personalizados en Sosúa, República Dominicana. Cada visita comienza con una evaluación de piel gratuita. Atención únicamente mediante citas."
+  },
+  "nav": {
+    "services": "Servicios",
+    "offers": "Ofertas",
+    "prices": "Precios",
+    "results": "Resultados",
+    "about": "Sobre Yai",
+    "contact": "Contacto",
+    "mainNav": "Navegación principal",
+    "book": "Reservar",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "toggleLang": "Cambiar a inglés"
+  },
+  "hero": {
+    "eyebrow": "Sosúa, República Dominicana",
+    "title": "Tu piel, tú marco perfecto",
+    "body": "Tratamientos faciales y corporales personalizados. Cada visita comienza con una evaluación de piel gratuita, y el plan se construye a partir de ella.",
+    "primaryCta": "Escríbele a Yai",
+    "secondaryCta": "Ver tratamientos",
+    "prefill": "Hola Yai, quisiera información sobre tus tratamientos.",
+    "photoLabel": "foto — retrato / cabina de tratamiento",
+    "stats": {
+      "yearsValue": "7+",
+      "yearsLabel": "Años de experiencia",
+      "treatmentsLabel": "Tratamientos",
+      "evaluationValue": "Gratis",
+      "evaluationLabel": "Evaluación inicial"
+    }
+  },
+  "promo": {
+    "validThrough": "Válido hasta agosto 2026",
+    "heading": "Oferta de referidos",
+    "badge": "Facial gratis",
+    "cta": "Reclamar la oferta",
+    "caption": "Menciona la oferta al reservar",
+    "value": "Valor",
+    "prefill": "Hola Yai, quiero participar en la oferta de referidos."
+  },
+  "treatments": {
+    "heading": "Tratamientos",
+    "intro": "Faciales, corporales, depilación, cejas y pestañas — atención únicamente mediante citas.",
+    "allHeading": "Todos los tratamientos",
+    "cta": "Reservar este tratamiento",
+    "ctaPrefill": "Hola Yai, me interesa el tratamiento: "
+  },
+  "results": {
+    "heading": "Resultados",
+    "caption": "Clientas reales, con autorización",
+    "photos": [
+      "antes / después — acné",
+      "antes / después — manchas",
+      "cejas — laminado",
+      "pestañas — extensiones"
+    ]
+  },
+  "about": {
+    "eyebrow": "Sobre Yai",
+    "heading": "Belleza, conocimiento y cuidado personalizado",
+    "intro": [
+      "Soy Yasmín, cosmiatra y profesional de la estética, y desde el año 2019 he dedicado mi formación y experiencia al cuidado de la piel.",
+      "A lo largo de mi trayectoria he tenido la oportunidad de trabajar en diferentes estéticas de Santo Domingo, adquiriendo experiencia práctica y desarrollando una forma de trabajo basada en el conocimiento, la observación y, sobre todo, en las necesidades reales de cada piel.",
+      "Hoy, con 28 años, continúo haciendo de mi pasión por la estética una parte esencial de mi vida. Para mí, trabajar con la piel no se trata simplemente de realizar un tratamiento; se trata de escuchar las preocupaciones de cada persona, comprender su piel y acompañarla en el proceso de conseguir una piel más saludable y cuidada."
+    ],
+    "sections": [
+      {
+        "heading": "Un tratamiento comienza con una evaluación",
+        "body": [
+          "En Yai Beauty Esthetic creemos que cada piel es diferente y, por eso, no todos los tratamientos deben ser iguales.",
+          "Cuando una clienta llega a nuestra cabina, el primer paso es conocer su piel. Realizamos una evaluación visual y táctil para observar aspectos como la textura, sensibilidad, hidratación, oleosidad, presencia de impurezas, alteraciones de pigmentación y otras características que puedan influir en el tratamiento.",
+          "También completamos una ficha clínica para conocer mejor las necesidades y antecedentes relevantes de la piel.",
+          "A partir de esta evaluación podemos determinar qué tratamiento es el más adecuado, qué productos utilizar y qué cuidados debemos evitar o modificar para respetar las condiciones particulares de cada piel.",
+          "Nuestro objetivo es que cada tratamiento sea personalizado y realizado con criterio profesional, no simplemente seguir un protocolo igual para todas las personas."
+        ]
+      },
+      {
+        "heading": "Los resultados se construyen en equipo",
+        "body": [
+          "Creemos que el cuidado de la piel es un trabajo en equipo.",
+          "El tratamiento realizado en cabina representa una parte importante del proceso, pero el cuidado en casa tiene el mismo valor. Por eso, después de cada tratamiento, orientamos a nuestras clientas sobre los productos y hábitos que pueden ayudar a mantener y mejorar los resultados en casa.",
+          "La constancia, los hábitos y el compromiso de la clienta son fundamentales.",
+          "Porque el verdadero cambio no ocurre solamente durante una hora en cabina: se construye con el cuidado continuo de la piel."
+        ]
+      },
+      {
+        "heading": "Mi mayor satisfacción: ver el proceso",
+        "body": [
+          "Una de las cosas que más me apasiona de mi profesión es poder ver la evolución de una piel.",
+          "Detrás de cada antes y después existe una persona que llegó con una preocupación, una inseguridad o simplemente con el deseo de cuidar mejor de sí misma.",
+          "Para mí, lo más gratificante es poder acompañarla, explicarle lo que su piel necesita y trabajar juntas para conseguir una evolución visible y saludable.",
+          "En Yai Beauty Esthetic cada piel tiene una historia, y cada tratamiento comienza escuchando esa historia."
+        ]
+      }
+    ],
+    "closing": "Tu piel no necesita simplemente un tratamiento. Necesita ser comprendida, evaluada y cuidada de manera personalizada.",
+    "photoLabel": "foto — Yai trabajando"
+  },
+  "faq": {
+    "heading": "Antes de tu visita",
+    "items": [
+      {
+        "q": "¿Necesito cita?",
+        "a": "Sí, atendemos solo mediante citas para dedicarle a cada sesión su tiempo completo."
+      },
+      {
+        "q": "¿La evaluación es gratis?",
+        "a": "Sí. Evaluamos tu piel en la visita y construimos el plan a partir de ahí."
+      },
+      {
+        "q": "¿Cómo me preparo?",
+        "a": "Ven sin maquillaje si es posible y evita la exposición al sol 48h antes de tratamientos faciales."
+      }
+    ]
+  },
+  "form": {
+    "heading": "Solicita tu cita",
+    "intro": "Envíalo y Yai te responde por WhatsApp para confirmar día y hora.",
+    "name": "Nombre",
+    "phone": "WhatsApp",
+    "treatment": "Tratamiento de interés",
+    "message": "Cuéntame sobre tu piel",
+    "submit": "Enviar solicitud",
+    "errorName": "Escribe tu nombre.",
+    "errorPhone": "Escribe un número de WhatsApp válido.",
+    "opening": "Abriendo WhatsApp…",
+    "prefillIntro": "Hola Yai, quiero solicitar una cita.",
+    "prefillName": "Nombre",
+    "prefillPhone": "WhatsApp",
+    "prefillTreatment": "Tratamiento",
+    "prefillMessage": "Nota"
+  },
+  "footer": {
+    "phoneLabel": "Llamar o escribir por WhatsApp",
+    "emailLabel": "Enviar un correo",
+    "instagramLabel": "Instagram"
+  },
+  "mobileBar": {
+    "cta": "Escríbele a Yai por WhatsApp"
+  }
+}
