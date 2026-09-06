@@ -9,7 +9,7 @@ type Item = { q: string; a: string };
 export function FaqList({ items, dict }: { items: Item[]; dict: Dictionary }) {
   return (
     <div>
-      <h2 className="mb-7 font-display text-[30px] leading-[1.1] font-light lg:text-[40px]">
+      <h2 className="reveal mb-7 font-display text-[30px] leading-[1.1] font-light lg:text-[40px]">
         {dict.faq.heading}
       </h2>
       <div className="border-b border-rule">

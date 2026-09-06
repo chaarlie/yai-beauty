@@ -15,10 +15,10 @@ export function ResultsGallery({ items, dict }: { items: ResultItem[]; dict: Dic
   return (
     <section id="resultados" className="section-x bg-blush-50 py-16 lg:py-22">
       <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between lg:mb-9">
-        <h2 className="font-display text-[32px] leading-[1.1] font-light lg:text-[46px]">
+        <h2 className="reveal font-display text-[32px] leading-[1.1] font-light lg:text-[46px]">
           {dict.results.heading}
         </h2>
-        <p className="t-label-wide text-photo-caption sm:text-right">{dict.results.caption}</p>
+        <p className="reveal t-label-wide text-photo-caption sm:text-right">{dict.results.caption}</p>
       </div>
 
       <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">

@@ -162,3 +162,82 @@
     }
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Motion — layered on top of the prototype, CSS-only (no JS, no dependency).
+
+   Three effects, one shared easing (cubic-bezier(0.16,1,0.3,1) — a soft
+   decelerate). All of it is enhancement: nothing here is allowed to hide
+   content on a browser that can't run it.
+     • .anim-rise  — one-time entrance for above-the-fold hero copy. A plain
+                     animation, so it runs everywhere and the global
+                     prefers-reduced-motion block already snaps it to the end.
+     • .reveal     — fade + rise as an element scrolls into view.
+     • .parallax   — image drifts slower than the scroll so the photo lingers.
+   The last two use scroll-driven timelines, guarded by @supports so
+   unsupported browsers (Firefox, Safari < 26) simply show the final state,
+   and wrapped in `no-preference` so reduced-motion users get nothing.
+--------------------------------------------------------------------------- */
+@layer components {
+  .anim-rise {
+    animation: rise-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--anim-delay, 0s);
+  }
+
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .reveal {
+        animation: rise-in linear both;
+        animation-timeline: view();
+        animation-range: entry 8% cover 26%;
+      }
+
+      /* Pure, slower opacity fade — used for the About heading as it enters,
+         before it pins. Completes during entry so a sticky element still
+         reaches full opacity while held. */
+      .fade-in {
+        animation: fade-soft linear both;
+        animation-timeline: view();
+        animation-range: entry 4% cover 34%;
+      }
+
+      @keyframes fade-soft {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* Applied to a fill <img>; the scale gives ~9% of slack on each edge so
+         the ±7% drift never exposes a gap. Parent must clip (PhotoSlot does). */
+      .parallax {
+        animation: parallax-drift linear both;
+        animation-timeline: view();
+        animation-range: cover;
+        will-change: transform;
+      }
+
+      @keyframes parallax-drift {
+        from {
+          transform: translateY(-7%) scale(1.18);
+        }
+        to {
+          transform: translateY(7%) scale(1.18);
+        }
+      }
+    }
+  }
+}

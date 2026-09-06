@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Dictionary } from "@/lib/dictionaries";
 import { PhotoSlot } from "./photo-slot";
 import { WhatsAppCTA } from "./whatsapp-cta";
@@ -30,14 +31,23 @@ export function Hero({ dict, treatmentCount }: { dict: Dictionary; treatmentCoun
       {/* Image first in the DOM would put a placeholder above the H1 on mobile,
           so it is ordered after the copy and only re-ordered at lg. */}
       <div className="section-x flex flex-col justify-center py-14 lg:pt-[110px] lg:pb-[90px]">
-        <p className="t-eyebrow">{hero.eyebrow}</p>
-        <h1 className="mt-6 font-display text-[40px] leading-[1.05] font-light tracking-[-0.01em] text-balance sm:text-[56px] lg:mt-[26px] lg:text-[76px] lg:leading-[1.02]">
+        <p className="t-eyebrow anim-rise">{hero.eyebrow}</p>
+        <h1
+          className="anim-rise mt-6 font-display text-[40px] leading-[1.05] font-light tracking-[-0.01em] text-balance sm:text-[56px] lg:mt-[26px] lg:text-[76px] lg:leading-[1.02]"
+          style={{ "--anim-delay": "0.08s" } as CSSProperties}
+        >
           {hero.title}
         </h1>
-        <p className="mt-7 max-w-[440px] text-[18px] leading-[1.7] font-light text-secondary">
+        <p
+          className="anim-rise mt-7 max-w-[440px] text-[18px] leading-[1.7] font-light text-secondary"
+          style={{ "--anim-delay": "0.16s" } as CSSProperties}
+        >
           {hero.body}
         </p>
-        <div className="mt-10 flex flex-wrap gap-4">
+        <div
+          className="anim-rise mt-10 flex flex-wrap gap-4"
+          style={{ "--anim-delay": "0.24s" } as CSSProperties}
+        >
           <WhatsAppCTA label={hero.primaryCta} variant="accent" prefill={hero.prefill} />
           <a
             href="#tratamientos"
@@ -46,10 +56,17 @@ export function Hero({ dict, treatmentCount }: { dict: Dictionary; treatmentCoun
             {hero.secondaryCta}
           </a>
         </div>
-        <StatRow stats={stats} />
+        <div className="anim-rise" style={{ "--anim-delay": "0.32s" } as CSSProperties}>
+          <StatRow stats={stats} />
+        </div>
       </div>
 
-      <PhotoSlot label={hero.photoLabel} className="order-first min-h-[280px] lg:order-none lg:min-h-full" />
+      <PhotoSlot
+        label={hero.photoLabel}
+        src="/images/hero-yai.webp"
+        reveal={false}
+        className="anim-rise order-first min-h-[280px] lg:order-none lg:min-h-full"
+      />
     </section>
   );
 }

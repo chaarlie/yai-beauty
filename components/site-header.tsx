@@ -3,6 +3,8 @@ import type { Dictionary } from "@/lib/dictionaries";
 import { otherLocale } from "@/lib/i18n";
 import { LangToggle } from "./lang-toggle";
 import { MobileNav } from "./mobile-nav";
+import { PrimaryNav } from "./primary-nav";
+import { ScrollProgress } from "./scroll-progress";
 import { WhatsAppCTA } from "./whatsapp-cta";
 
 export type NavItem = { href: string; label: string };
@@ -44,13 +46,7 @@ export function SiteHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) {
       <div className="flex items-center justify-between gap-6 px-6 py-4 lg:px-14 lg:py-[26px]">
         <Wordmark />
 
-        <nav aria-label={dict.nav.mainNav} className="hidden nav:flex nav:gap-[34px]">
-          {items.map((item, i) => (
-            <a key={`${item.href}-${i}`} className="t-nav text-secondary" href={item.href}>
-              {item.label}
-            </a>
-          ))}
-        </nav>
+        <PrimaryNav items={items} label={dict.nav.mainNav} />
 
         <div className="flex items-center gap-3 lg:gap-5">
           {/* Both of these stay visible in the collapsed bar — they are the two
@@ -66,6 +62,8 @@ export function SiteHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           <MobileNav items={items} openLabel={dict.nav.openMenu} closeLabel={dict.nav.closeMenu} />
         </div>
       </div>
+
+      <ScrollProgress />
     </header>
   );
 }

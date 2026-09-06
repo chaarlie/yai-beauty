@@ -42,9 +42,12 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <main>
         <Hero dict={dict} treatmentCount={services.length} />
 
-        {promo ? <PromoCard promo={promo} lang={lang} dict={dict} /> : null}
-
+        {/* Section order tracks the nav's left-to-right order (Servicios, Ofertas,
+            …) so the header underline steps through the menu in sequence as you
+            scroll. Treatments therefore precede the promo. */}
         <ServiceList featured={featured} groups={groups} lang={lang} dict={dict} />
+
+        {promo ? <PromoCard promo={promo} lang={lang} dict={dict} /> : null}
 
         {results.length > 0 ? <ResultsGallery items={results} dict={dict} /> : null}
 

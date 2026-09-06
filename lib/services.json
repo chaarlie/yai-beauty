@@ -31,7 +31,8 @@
       "es": "Tratamiento facial profundo",
       "en": "Deep facial treatment",
       "price": 2000,
-      "featured": true
+      "featured": true,
+      "image": "/images/service-facial-profundo.webp"
     },
     {
       "slug": "acne",
@@ -39,7 +40,8 @@
       "es": "Tratamiento para acné",
       "en": "Acne treatment",
       "price": 3800,
-      "featured": true
+      "featured": true,
+      "image": "/images/service-acne.webp"
     },
     {
       "slug": "manchas",
@@ -47,7 +49,8 @@
       "es": "Tratamiento para manchas",
       "en": "Dark spot / melasma treatment",
       "price": 4000,
-      "featured": true
+      "featured": true,
+      "image": "/images/service-manchas.webp"
     },
     {
       "slug": "piel-madura",
@@ -91,7 +94,8 @@
       "es": "Tratamiento para espalda",
       "en": "Back treatment",
       "price": 4300,
-      "featured": true
+      "featured": true,
+      "image": "/images/service-espalda.webp"
     },
     {
       "slug": "gluteos",
@@ -103,7 +107,8 @@
         "es": "Tratamiento para glúteos de verano",
         "en": "Summer glute treatment"
       },
-      "featured": true
+      "featured": true,
+      "image": "/images/service-gluteos.webp"
     },
     {
       "slug": "vajacial",
@@ -190,7 +195,8 @@
       "es": "Laminado de cejas",
       "en": "Brow lamination",
       "price": 800,
-      "featured": true
+      "featured": true,
+      "image": "/images/service-laminado-cejas.webp"
     }
   ],
   "promo": {

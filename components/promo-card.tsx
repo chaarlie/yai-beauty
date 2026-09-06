@@ -20,8 +20,8 @@ export function PromoCard({ promo, lang, dict }: Props) {
     <section id="ofertas" className="section-x border-t border-rule py-16 lg:py-22">
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between lg:mb-[34px]">
         <div>
-          <p className="t-eyebrow">{promo.label[lang]}</p>
-          <h2 className="mt-4 font-display text-[32px] leading-[1.1] font-light lg:text-[46px]">
+          <p className="reveal t-eyebrow">{promo.label[lang]}</p>
+          <h2 className="reveal mt-4 font-display text-[32px] leading-[1.1] font-light lg:text-[46px]">
             {dict.promo.heading}
           </h2>
         </div>
