@@ -2,61 +2,69 @@ import type { Dictionary } from "@/lib/dictionaries";
 import { PhotoSlot } from "./photo-slot";
 
 /**
- * Yai's own words, so the section carries real length. The opening stays in the
- * prototype's two-column arrangement; the three chapters below it use the same
- * heading-left / body-right row the treatments and FAQ headers already use, so
- * a long read stays inside the design language rather than becoming a wall.
+ * Yai's own words, so the section carries real length.
+ *
+ * On desktop the identity block — eyebrow, the "Belleza, conocimiento…"
+ * heading, and Yai's portrait — is pinned (`lg:sticky`) while the whole bio
+ * (intro + chapters + closing) scrolls past on the right, releasing only when
+ * the section ends. The bio column is the tall one; that height is what gives
+ * the sticky block its travel, so the chapters live here (stacked) rather than
+ * in their old side-by-side rows. Mobile drops the pin and stacks in order.
  */
 export function About({ dict }: { dict: Dictionary }) {
   const { about } = dict;
 
   return (
-    <section id="sobre">
-      <div className="grid items-center lg:grid-cols-[0.9fr_1.1fr]">
-        <PhotoSlot label={about.photoLabel} className="min-h-[320px] lg:min-h-[520px]" />
-
-        <div className="section-x py-14 lg:py-20">
-          <p className="t-eyebrow">{about.eyebrow}</p>
-          <h2 className="mt-5 max-w-[520px] font-display text-[32px] leading-[1.15] font-light lg:mt-[22px] lg:text-[44px]">
+    <section id="sobre" className="section-x py-14 lg:py-24">
+      <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+        {/* Pinned identity block. `self-start` keeps it from stretching so it
+            can actually travel; it stays under the sticky header via top-24. */}
+        <div className="lg:sticky lg:top-24 lg:self-start">
+          <p className="reveal t-eyebrow">{about.eyebrow}</p>
+          <h2 className="fade-in mt-5 max-w-[420px] font-display text-[32px] leading-[1.15] font-light lg:mt-[22px] lg:text-[44px]">
             {about.heading}
           </h2>
+          <PhotoSlot
+            label={about.photoLabel}
+            src="/images/about-yai.webp"
+            revealVariant="calm"
+            className="mt-8 min-h-[320px] lg:mt-10 lg:h-[42vh] lg:max-h-[460px] lg:min-h-[300px]"
+          />
+        </div>
 
-          {about.intro.map((paragraph) => (
+        {/* The bio — the tall, scrolling column. */}
+        <div>
+          {about.intro.map((paragraph, i) => (
             <p
               key={paragraph}
-              className="mt-6 max-w-[520px] text-[17px] leading-[1.8] font-light text-secondary"
+              className={`reveal max-w-[620px] text-[17px] leading-[1.8] font-light text-secondary ${i > 0 ? "mt-6" : ""}`}
             >
               {paragraph}
             </p>
           ))}
-        </div>
-      </div>
 
-      <div className="section-x pb-16 lg:pb-22">
-        {about.sections.map((chapter) => (
-          <div
-            key={chapter.heading}
-            className="grid gap-4 border-t border-rule py-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:py-14"
-          >
-            <h3 className="max-w-[380px] font-display text-[26px] leading-[1.2] font-light lg:text-[30px]">
-              {chapter.heading}
-            </h3>
-            <div className="max-w-[620px]">
-              {chapter.body.map((paragraph, i) => (
-                <p
-                  key={paragraph}
-                  className={`text-[16px] leading-[1.8] font-light text-secondary ${i > 0 ? "mt-5" : ""}`}
-                >
-                  {paragraph}
-                </p>
-              ))}
+          {about.sections.map((chapter) => (
+            <div key={chapter.heading} className="reveal mt-10 border-t border-rule pt-10 lg:mt-14 lg:pt-14">
+              <h3 className="max-w-[420px] font-display text-[26px] leading-[1.2] font-light lg:text-[30px]">
+                {chapter.heading}
+              </h3>
+              <div className="mt-4 max-w-[620px]">
+                {chapter.body.map((paragraph, i) => (
+                  <p
+                    key={paragraph}
+                    className={`text-[16px] leading-[1.8] font-light text-secondary ${i > 0 ? "mt-5" : ""}`}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
 
-        <p className="border-t border-rule pt-10 font-display text-[26px] leading-[1.45] font-light text-balance lg:pt-14 lg:text-[32px]">
-          {about.closing}
-        </p>
+          <p className="reveal mt-10 border-t border-rule pt-10 font-display text-[26px] leading-[1.45] font-light text-balance lg:mt-14 lg:pt-14 lg:text-[32px]">
+            {about.closing}
+          </p>
+        </div>
       </div>
     </section>
   );

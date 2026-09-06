@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { NavItem } from "./site-header";
+import { useActiveSection } from "./use-active-section";
 
 type Props = {
   items: NavItem[];
@@ -15,6 +16,8 @@ type Props = {
  */
 export function MobileNav({ items, openLabel, closeLabel }: Props) {
   const [open, setOpen] = useState(false);
+  const activeHref = useActiveSection(items.map((item) => item.href));
+  const activeIndex = activeHref ? items.findIndex((item) => item.href === activeHref) : -1;
 
   // Body scroll lock only while the panel is open.
   useEffect(() => {
@@ -51,16 +54,25 @@ export function MobileNav({ items, openLabel, closeLabel }: Props) {
         className="absolute inset-x-0 top-full z-30 h-[calc(100dvh-100%)] overflow-y-auto border-t border-rule bg-cream px-6 py-8"
       >
         <nav className="flex flex-col">
-          {items.map((item, i) => (
-            <a
-              key={`${item.href}-${i}`}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="t-nav flex min-h-11 items-center border-b border-rule py-4 text-secondary"
-            >
-              {item.label}
-            </a>
-          ))}
+          {items.map((item, i) => {
+            const isActive = activeIndex === i;
+            return (
+              <a
+                key={`${item.href}-${i}`}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                aria-current={isActive ? "true" : undefined}
+                className={`t-nav relative flex min-h-11 items-center border-b border-rule py-4 pl-4 transition-colors duration-200 ${
+                  isActive ? "text-ink" : "text-secondary"
+                }`}
+              >
+                {isActive ? (
+                  <span className="absolute top-3 bottom-3 left-0 w-[2px] bg-clay" />
+                ) : null}
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
       </div>
     </div>

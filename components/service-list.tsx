@@ -40,7 +40,7 @@ function FeaturedRow({
         src={service.image}
         className={`aspect-4/5 sm:aspect-3/2 lg:aspect-4/5 ${flipped ? "lg:order-2" : ""}`}
       />
-      <div className={flipped ? "lg:order-1" : ""}>
+      <div className={`reveal ${flipped ? "lg:order-1" : ""}`}>
         <h3 className="max-w-[420px] font-display text-[30px] leading-[1.15] font-light text-balance lg:text-[40px]">
           {name}
         </h3>
@@ -65,10 +65,10 @@ export function ServiceList({ featured, groups, lang, dict }: Props) {
   return (
     <section id="tratamientos">
       <div className="section-x flex flex-col gap-4 border-t border-rule pt-16 pb-5 sm:flex-row sm:items-end sm:justify-between lg:pt-24">
-        <h2 className="font-display text-[32px] leading-[1.1] font-light lg:text-[46px]">
+        <h2 className="reveal font-display text-[32px] leading-[1.1] font-light lg:text-[46px]">
           {dict.treatments.heading}
         </h2>
-        <p className="max-w-[380px] text-[15px] leading-[1.7] font-light text-tertiary">
+        <p className="reveal max-w-[380px] text-[15px] leading-[1.7] font-light text-tertiary">
           {dict.treatments.intro}
         </p>
       </div>
@@ -86,7 +86,7 @@ export function ServiceList({ featured, groups, lang, dict }: Props) {
       </div>
 
       <div className="section-x border-t border-rule pt-14 pb-16 lg:pb-24">
-        <h3 className="t-label-wide mb-8 text-muted">{dict.treatments.allHeading}</h3>
+        <h3 className="reveal t-label-wide mb-8 text-muted">{dict.treatments.allHeading}</h3>
 
         <div className="grid gap-x-16 gap-y-10 md:grid-cols-2">
           {groups.map((group) => (
