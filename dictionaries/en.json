@@ -23,7 +23,7 @@
     "primaryCta": "WhatsApp Yai",
     "secondaryCta": "See treatments",
     "prefill": "Hi Yai, I'd like information about your treatments.",
-    "photoLabel": "photo — portrait / treatment room",
+    "photoLabel": "Yai caring for a client in her treatment room",
     "stats": {
       "yearsValue": "7+",
       "yearsLabel": "Years of experience",
@@ -33,13 +33,40 @@
     }
   },
   "promo": {
-    "validThrough": "Valid through August 2026",
-    "heading": "Referral offer",
-    "badge": "Free facial",
+    "validUntil": "Valid through {date}",
     "cta": "Claim the offer",
     "caption": "Mention the offer when you book",
     "value": "Value",
-    "prefill": "Hi Yai, I'd like to join the referral offer."
+    "prefill": "Hi Yai, I'd like the offer: {offer}",
+    "folder": {
+      "open": "Open the offer",
+      "close": "Close the offer",
+      "howItWorks": "How it works"
+    },
+    "carousel": {
+      "label": "Offers",
+      "previous": "Previous offer",
+      "next": "Next offer",
+      "slide": "Offer {n} of {total}",
+      "goTo": "Show offer {n}",
+      "pause": "Pause",
+      "play": "Resume"
+    },
+    "share": {
+      "label": "Share",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "copy": "Copy link",
+      "copied": "Link copied.",
+      "instagramSaved": "Image saved and link copied — add it to your Instagram story.",
+      "failed": "Couldn't share. Use “Copy link”.",
+      "text": "{offer} — Yai Beauty Esthetic, Sosúa",
+      "instagramHint": "Instagram: open your device’s sharing options or save the image to add to your story."
+    },
+    "page": {
+      "allOffers": "See all offers and prices"
+    }
   },
   "treatments": {
     "heading": "Treatments",
@@ -51,12 +78,8 @@
   "results": {
     "heading": "Results",
     "caption": "Real clients, with permission",
-    "photos": [
-      "before / after — acne",
-      "before / after — dark spots",
-      "brows — lamination",
-      "lashes — extensions"
-    ]
+    "before": "Before",
+    "after": "After"
   },
   "about": {
     "eyebrow": "About",
@@ -97,7 +120,7 @@
       }
     ],
     "closing": "Your skin does not simply need a treatment. It needs to be understood, evaluated and cared for in a personalized way.",
-    "photoLabel": "photo — Yai at work"
+    "photoLabel": "Yai carefully working on a client’s face"
   },
   "faq": {
     "heading": "Before your visit",

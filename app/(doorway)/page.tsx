@@ -1,8 +1,10 @@
+import { siteUrl } from "@/lib/site";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { defaultLocale, locales } from "@/lib/i18n";
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl(),
   // The two real locales are what gets indexed; this is only a doorway.
   robots: { index: false, follow: false },
   alternates: {
@@ -10,7 +12,7 @@ export const metadata: Metadata = {
   },
 };
 
-// A static export has no server, so the locale choice for the bare `/` is made
+// Built when the site was a static export, so the locale choice for the bare `/` is made
 // in the browser: a remembered choice first, then the browser's own language,
 // then Spanish. Inlined rather than run from a client component so the redirect
 // fires before React is downloaded — this page is a doorway, not a render.

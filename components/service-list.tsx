@@ -38,6 +38,8 @@ function FeaturedRow({
       <PhotoSlot
         label={name}
         src={service.image}
+        focus={service.imageFocus}
+        parallax={service.imageParallax}
         className={`aspect-4/5 sm:aspect-3/2 lg:aspect-4/5 ${flipped ? "lg:order-2" : ""}`}
       />
       <div className={`reveal ${flipped ? "lg:order-1" : ""}`}>

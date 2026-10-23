@@ -1,16 +1,7 @@
 import type { Dictionary } from "@/lib/dictionaries";
+import { imageUrl } from "@/lib/content";
 import { PhotoSlot } from "./photo-slot";
 
-/**
- * Yai's own words, so the section carries real length.
- *
- * On desktop the identity block — eyebrow, the "Belleza, conocimiento…"
- * heading, and Yai's portrait — is pinned (`lg:sticky`) while the whole bio
- * (intro + chapters + closing) scrolls past on the right, releasing only when
- * the section ends. The bio column is the tall one; that height is what gives
- * the sticky block its travel, so the chapters live here (stacked) rather than
- * in their old side-by-side rows. Mobile drops the pin and stacks in order.
- */
 export function About({ dict }: { dict: Dictionary }) {
   const { about } = dict;
 
@@ -26,9 +17,11 @@ export function About({ dict }: { dict: Dictionary }) {
           </h2>
           <PhotoSlot
             label={about.photoLabel}
-            src="/images/about-yai.webp"
+            src={imageUrl("salon-areas/20261012_0092.webp")}
             revealVariant="calm"
-            className="mt-8 min-h-[320px] lg:mt-10 lg:h-[42vh] lg:max-h-[460px] lg:min-h-[300px]"
+            parallax={false}
+            focus="50% 35%"
+            className="mt-8 aspect-4/5 lg:mt-10"
           />
         </div>
 

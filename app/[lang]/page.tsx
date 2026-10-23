@@ -1,10 +1,12 @@
+import { siteUrl } from "@/lib/site";
 import { notFound } from "next/navigation";
 import { getDictionary } from "@/lib/dictionaries";
 import {
   getBusiness,
   getFeaturedServices,
-  getPromo,
+  getPromos,
   getRemainingByCategory,
+  getResults,
   getServices,
   serviceName,
 } from "@/lib/content";
@@ -12,6 +14,7 @@ import { isLocale } from "@/lib/i18n";
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
 import { PromoCard } from "@/components/promo-card";
+import { PromoTeaser } from "@/components/promo-teaser";
 import { ServiceList } from "@/components/service-list";
 import { ResultsGallery } from "@/components/results-gallery";
 import { About } from "@/components/about";
@@ -25,21 +28,45 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   if (!isLocale(lang)) notFound();
 
   const dict = await getDictionary(lang);
-  const services = getServices();
-  const featured = getFeaturedServices();
-  const groups = getRemainingByCategory();
-  const promo = getPromo();
+  const [services, featured, groups, promos, pairs] = await Promise.all([
+    getServices(),
+    getFeaturedServices(),
+    getRemainingByCategory(),
+    getPromos(),
+    getResults(),
+  ]);
   const business = getBusiness();
 
-  // No real photography exists yet, so every slot is a labelled placeholder.
-  // Drop an entry to remove a cell; the gallery is omitted entirely at zero.
-  const results = dict.results.photos.map((label) => ({ label }));
+  // Only pairs with signed consent reach a production build (see getResults);
+  // the gallery is omitted entirely at zero.
+  const results = pairs.map(({ service, ...pair }) => ({
+    ...pair,
+    label: serviceName(service, lang),
+  }));
 
   return (
     <>
-      <SiteHeader lang={lang} dict={dict} />
+      <SiteHeader lang={lang} dict={dict} hasPromo={promos.length > 0} hasResults={results.length > 0} />
 
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BeautySalon",
+        "@id": new URL("/#salon", siteUrl()).href,
+        name: business.name,
+        url: new URL(`/${lang}/`, siteUrl()).href,
+        telephone: business.phone,
+        email: business.email,
+        sameAs: [business.instagramUrl],
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: `${business.address.street}, ${business.address.building}`,
+          addressLocality: business.address.city,
+          addressCountry: "DO",
+        },
+      }).replace(/</g, "\\u003c") }} />
       <main>
+        {promos.length > 0 ? <PromoTeaser promos={promos} lang={lang} dict={dict} /> : null}
+
         <Hero dict={dict} treatmentCount={services.length} />
 
         {/* Section order tracks the nav's left-to-right order (Servicios, Ofertas,
@@ -47,7 +74,13 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             scroll. Treatments therefore precede the promo. */}
         <ServiceList featured={featured} groups={groups} lang={lang} dict={dict} />
 
-        {promo ? <PromoCard promo={promo} lang={lang} dict={dict} /> : null}
+        {promos.length > 0 ? (
+          <section id="ofertas" aria-label={dict.nav.offers}>
+            {promos.map((promo) => (
+              <PromoCard key={promo.id} promo={promo} lang={lang} dict={dict} />
+            ))}
+          </section>
+        ) : null}
 
         {results.length > 0 ? <ResultsGallery items={results} dict={dict} /> : null}
 

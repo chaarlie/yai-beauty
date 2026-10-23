@@ -1,3 +1,4 @@
+import { siteUrl } from "@/lib/site";
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Jost } from "next/font/google";
 import { getDictionary } from "@/lib/dictionaries";
@@ -21,12 +22,13 @@ const jost = Jost({
   display: "swap",
 });
 
-// Both locales are prerendered; `output: 'export'` requires the full set.
+// Both locales are prerendered. Anything else that isn't a language 404s through
+// the isLocale checks below and in each page, not through `dynamicParams = false`:
+// that setting would close every route under [lang] to new params, and an offer
+// created after a deploy would 404 on its own page until the next build.
 export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
-
-export const dynamicParams = false;
 
 export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
   const { lang } = await params;
@@ -36,14 +38,18 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   const business = getBusiness();
 
   return {
+    metadataBase: siteUrl(),
     title: dict.meta.title,
     description: dict.meta.description,
     alternates: {
       canonical: `/${lang}/`,
       languages: { es: "/es/", en: "/en/" },
     },
+    twitter: { card: "summary_large_image", images: ["/opengraph-image"] },
     openGraph: {
       type: "website",
+      url: `/${lang}/`,
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: business.name }],
       siteName: business.name,
       locale: lang === "es" ? "es_DO" : "en_US",
       title: dict.meta.title,

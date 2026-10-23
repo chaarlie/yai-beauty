@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import type { Dictionary } from "@/lib/dictionaries";
+import { imageUrl } from "@/lib/content";
 import { PhotoSlot } from "./photo-slot";
 import { WhatsAppCTA } from "./whatsapp-cta";
 
@@ -28,8 +29,7 @@ export function Hero({ dict, treatmentCount }: { dict: Dictionary; treatmentCoun
 
   return (
     <section className="grid lg:min-h-[660px] lg:grid-cols-[1.05fr_0.95fr]">
-      {/* Image first in the DOM would put a placeholder above the H1 on mobile,
-          so it is ordered after the copy and only re-ordered at lg. */}
+      {/* The portrait leads on mobile; desktop pairs it with the introduction. */}
       <div className="section-x flex flex-col justify-center py-14 lg:pt-[110px] lg:pb-[90px]">
         <p className="t-eyebrow anim-rise">{hero.eyebrow}</p>
         <h1
@@ -63,9 +63,12 @@ export function Hero({ dict, treatmentCount }: { dict: Dictionary; treatmentCoun
 
       <PhotoSlot
         label={hero.photoLabel}
-        src="/images/hero-yai.webp"
+        src={imageUrl("salon-areas/20261012_0099.webp")}
         reveal={false}
-        className="anim-rise order-first min-h-[280px] lg:order-none lg:min-h-full"
+        eager
+        parallax={false}
+        focus="50% 35%"
+        className="anim-rise order-first aspect-4/5 max-h-[640px] lg:order-none lg:aspect-auto lg:max-h-none lg:min-h-full"
       />
     </section>
   );
