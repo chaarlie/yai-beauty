@@ -1,17 +1,23 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Static site — nothing needs a server at launch. See handoff "Recommended stack".
-  // Phase 2 (Sanity -> Instagram) requires a server; this is the line that goes away.
-  output: "export",
+  // No longer a static export: /admin, its API routes and proxy.ts need a server.
+  // The public pages are still prerendered, and refresh when an offer changes.
 
-  // Emit /es/index.html rather than /es.html so any static host serves it correctly.
+  // Kept from the static-export days so every address already shared — /es/,
+  // /en/ — stays the canonical one.
   trailingSlash: true,
 
   images: {
-    // `output: 'export'` has no image optimization server. Swap in a custom
-    // `loader`/`loaderFile` if real photography ever moves to a CDN.
+    // Photos ship exactly as stored: they are already sized WebP, and Supabase's
+    // image transformations aren't on the free plan.
     unoptimized: true,
+    // Photography lives in the public `yai-beauty` bucket (see lib/content.ts).
+    // `unoptimized` skips this check today; it keeps any optimizer scoped to
+    // the bucket if that ever changes.
+    remotePatterns: [
+      new URL("https://jdomxbzbovlnnlxoqngs.supabase.co/storage/v1/object/public/yai-beauty/**"),
+    ],
   },
 };
 

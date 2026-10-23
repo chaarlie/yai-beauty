@@ -1,15 +1,20 @@
+import Image from "next/image";
 import type { Dictionary } from "@/lib/dictionaries";
-import { PhotoSlot } from "./photo-slot";
+import type { ResultPair } from "@/lib/content";
 
-export type ResultItem = { label: string; src?: string };
+export type ResultItem = Omit<ResultPair, "service"> & { label: string };
 
 /**
  * ⚠️ Written client consent is required before any before/after photo ships.
- * This is legal exposure in aesthetics, not a design detail — an item without
- * signed consent must simply not be in this array.
+ * This is legal exposure in aesthetics, not a design detail — `getResults()`
+ * keeps a pair without a `consent` date out of every production build.
  *
  * The grid reads correctly at 0, 2 or 4 items; at 0 the whole section is
  * omitted by the page rather than rendering an empty band.
+ *
+ * Each card holds both frames, so a pair never splits across a grid reflow. The
+ * halves deliberately skip PhotoSlot's parallax: its zoom and drift would crop
+ * the two frames differently, which a comparison can't afford.
  */
 export function ResultsGallery({ items, dict }: { items: ResultItem[]; dict: Dictionary }) {
   return (
@@ -23,15 +28,35 @@ export function ResultsGallery({ items, dict }: { items: ResultItem[]; dict: Dic
 
       <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
         {items.map((item) => (
-          <PhotoSlot
-            key={item.label}
-            label={item.label}
-            src={item.src}
-            size="sm"
-            className="aspect-3/4"
-          />
+          <figure key={item.label} className="reveal">
+            <div
+              className={`grid aspect-3/4 gap-0.5 ${item.layout === "stacked" ? "grid-rows-2" : "grid-cols-2"}`}
+            >
+              <ResultFrame src={item.before} tag={dict.results.before} label={item.label} focus={item.focus} />
+              <ResultFrame src={item.after} tag={dict.results.after} label={item.label} focus={item.focus} />
+            </div>
+            <figcaption className="t-label mt-3 text-photo-caption">{item.label}</figcaption>
+          </figure>
         ))}
       </div>
     </section>
+  );
+}
+
+function ResultFrame({ src, tag, label, focus }: { src: string; tag: string; label: string; focus: string }) {
+  return (
+    <div className="relative overflow-hidden">
+      <Image
+        src={src}
+        alt={`${label} — ${tag}`}
+        fill
+        sizes="(max-width: 1024px) 50vw, 25vw"
+        className="object-cover"
+        style={{ objectPosition: focus }}
+      />
+      <span className="absolute top-2 left-2 bg-blush-50 px-2.5 py-1.5 font-mono text-[10px] leading-[1.5] tracking-[0.1em] text-[#7a5a4c]">
+        {tag}
+      </span>
+    </div>
   );
 }

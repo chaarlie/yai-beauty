@@ -23,7 +23,7 @@
     "primaryCta": "Escríbele a Yai",
     "secondaryCta": "Ver tratamientos",
     "prefill": "Hola Yai, quisiera información sobre tus tratamientos.",
-    "photoLabel": "foto — retrato / cabina de tratamiento",
+    "photoLabel": "Yai atendiendo a una clienta en su cabina de estética",
     "stats": {
       "yearsValue": "7+",
       "yearsLabel": "Años de experiencia",
@@ -33,13 +33,40 @@
     }
   },
   "promo": {
-    "validThrough": "Válido hasta agosto 2026",
-    "heading": "Oferta de referidos",
-    "badge": "Facial gratis",
+    "validUntil": "Válido hasta el {date}",
     "cta": "Reclamar la oferta",
     "caption": "Menciona la oferta al reservar",
     "value": "Valor",
-    "prefill": "Hola Yai, quiero participar en la oferta de referidos."
+    "prefill": "Hola Yai, quiero la oferta: {offer}",
+    "folder": {
+      "open": "Abrir la oferta",
+      "close": "Cerrar la oferta",
+      "howItWorks": "Cómo funciona"
+    },
+    "carousel": {
+      "label": "Ofertas",
+      "previous": "Oferta anterior",
+      "next": "Oferta siguiente",
+      "slide": "Oferta {n} de {total}",
+      "goTo": "Ver la oferta {n}",
+      "pause": "Pausar",
+      "play": "Reanudar"
+    },
+    "share": {
+      "label": "Compartir",
+      "whatsapp": "WhatsApp",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "copy": "Copiar enlace",
+      "copied": "Enlace copiado.",
+      "instagramSaved": "Imagen guardada y enlace copiado: súbela a tu historia de Instagram.",
+      "failed": "No se pudo compartir. Usa «Copiar enlace».",
+      "text": "{offer} — Yai Beauty Esthetic, Sosúa",
+      "instagramHint": "Instagram: abre las opciones de compartir de tu dispositivo o guarda la imagen para subirla a tu historia."
+    },
+    "page": {
+      "allOffers": "Ver todas las ofertas y precios"
+    }
   },
   "treatments": {
     "heading": "Tratamientos",
@@ -51,12 +78,8 @@
   "results": {
     "heading": "Resultados",
     "caption": "Clientas reales, con autorización",
-    "photos": [
-      "antes / después — acné",
-      "antes / después — manchas",
-      "cejas — laminado",
-      "pestañas — extensiones"
-    ]
+    "before": "Antes",
+    "after": "Después"
   },
   "about": {
     "eyebrow": "Sobre Yai",
@@ -97,7 +120,7 @@
       }
     ],
     "closing": "Tu piel no necesita simplemente un tratamiento. Necesita ser comprendida, evaluada y cuidada de manera personalizada.",
-    "photoLabel": "foto — Yai trabajando"
+    "photoLabel": "Yai trabajando con atención en el rostro de una clienta"
   },
   "faq": {
     "heading": "Antes de tu visita",

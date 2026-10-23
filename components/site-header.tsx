@@ -7,24 +7,13 @@ import { PrimaryNav } from "./primary-nav";
 import { ScrollProgress } from "./scroll-progress";
 import { WhatsAppCTA } from "./whatsapp-cta";
 
-export type NavItem = { href: string; label: string };
+import { navItems } from "@/lib/navigation";
+export type { NavItem } from "@/lib/navigation";
 
-/** "Servicios" and "Precios" both point at the treatments list — it is one flat
- *  priced list, which is the client's explicit choice. */
-export function navItems(dict: Dictionary): NavItem[] {
-  return [
-    { href: "#tratamientos", label: dict.nav.services },
-    { href: "#ofertas", label: dict.nav.offers },
-    { href: "#tratamientos", label: dict.nav.prices },
-    { href: "#resultados", label: dict.nav.results },
-    { href: "#sobre", label: dict.nav.about },
-    { href: "#contacto", label: dict.nav.contact },
-  ];
-}
-
-function Wordmark() {
+/** `href` defaults to the top of the page it's on; the offer pages point it home. */
+export function Wordmark({ href = "#top" }: { href?: string }) {
   return (
-    <a href="#top" className="flex shrink-0 items-baseline gap-2 whitespace-nowrap hover:text-inherit lg:gap-3">
+    <a href={href} className="flex shrink-0 items-baseline gap-2 whitespace-nowrap hover:text-inherit lg:gap-3">
       <span className="font-display text-[18px] leading-none font-normal tracking-[0.18em] lg:text-[22px]">
         YAI BEAUTY
       </span>
@@ -35,8 +24,8 @@ function Wordmark() {
   );
 }
 
-export function SiteHeader({ lang, dict }: { lang: Locale; dict: Dictionary }) {
-  const items = navItems(dict);
+export function SiteHeader({ lang, dict, hasPromo, hasResults }: { lang: Locale; dict: Dictionary; hasPromo: boolean; hasResults: boolean }) {
+  const items = navItems(dict.nav, { hasPromo, hasResults });
 
   return (
     <header
