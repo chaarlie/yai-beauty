@@ -11,6 +11,8 @@ for (const hasPromo of [false, true]) for (const hasResults of [false, true]) {
     assert.equal(links.includes('#ofertas'), hasPromo);
     assert.equal(links.includes('#resultados'), hasResults);
     assert.ok(links.includes('#contacto'));
+    // Prices has its own anchor, and the menu follows the page order.
+    assert.deepEqual(links.slice(0, 2), ['#tratamientos', '#precios']);
   });
 }
 

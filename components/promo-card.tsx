@@ -14,84 +14,62 @@ type Props = {
 };
 
 /**
- * One offer in full — the strongest visual break on the page. The page lists one
- * per live offer inside the #ofertas section; each answers to `#oferta-<id>`,
- * where the carousel's "Cómo funciona" points. The steps-and-value column only
- * renders when the offer has one of them.
+ * One offer in full, as the proposal's blush strip: a tilted stamp with the
+ * coupon's words, the offer and its steps, the small print and sharing, and the
+ * way to claim it. The page stacks one per live offer inside #ofertas; each
+ * answers to `#oferta-<id>`, where the hero's "Cómo funciona" points.
  */
 export function PromoCard({ promo, lang, dict }: Props) {
   const validity = promo.endsOn ? dict.promo.validUntil.replace("{date}", formatDay(promo.endsOn, lang)) : null;
-  const hasAside = promo.steps.length > 0 || promo.valueDOP !== null;
+  const value = promo.valueDOP === null ? null : `${dict.promo.value} ${formatPrice(promo.valueDOP)}`;
+  const smallPrint = [validity, value].filter(Boolean).join(" · ");
 
   return (
-    <article id={`oferta-${promo.id}`} className="section-x scroll-mt-24 border-t border-rule py-16 lg:py-22">
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between lg:mb-[34px]">
-        <div>
-          <p className="reveal t-eyebrow">{promo.label[lang]}</p>
-          <h2 className="reveal mt-4 font-display text-[32px] leading-[1.1] font-light lg:text-[46px]">
-            {promo.heading[lang]}
-          </h2>
-        </div>
-        {validity ? <p className="t-label-wide text-muted sm:text-right">{validity}</p> : null}
+    <article
+      id={`oferta-${promo.id}`}
+      className="reveal grid scroll-mt-28 items-center gap-5 bg-offer px-5.5 py-7 sm:px-8 md:grid-cols-[auto_minmax(0,1fr)] md:gap-x-8 lg:grid-cols-[auto_minmax(0,1fr)_auto] lg:gap-x-9 lg:px-11 lg:py-9"
+    >
+      <div
+        aria-hidden="true"
+        className="hidden size-24 -rotate-12 place-items-center rounded-full border border-[#ad8572] p-2.5 text-center font-display text-[21px] leading-[1.05] text-balance md:grid"
+      >
+        {promo.badge[lang]}
       </div>
 
-      <div className={`grid bg-ink text-cream ${hasAside ? "lg:grid-cols-[1.25fr_0.75fr]" : ""}`}>
-        <div className="flex flex-col justify-between gap-9 px-7 py-12 lg:px-13 lg:py-14">
-          <div>
-            <span className="t-label-wide inline-block bg-clay px-3.5 py-2.5 tracking-[0.22em] text-white">
-              {promo.badge[lang]}
-            </span>
-            <h3 className="mt-6 max-w-[560px] font-display text-[34px] leading-[1.08] font-light text-balance lg:text-[54px] lg:leading-[1.06]">
-              {promo.title[lang]}
-            </h3>
-            <p className="mt-5 max-w-[480px] text-[17px] leading-[1.7] font-light text-on-dark-intro">
-              {promo.body[lang]}
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-x-[26px] gap-y-4">
-            <WhatsAppCTA
-              label={dict.promo.cta}
-              variant="accent"
-              prefill={dict.promo.prefill.replace("{offer}", promo.title[lang])}
-            />
-            <span className="text-sm leading-[1.6] font-light text-on-dark-caption">
-              {dict.promo.caption}
-            </span>
-          </div>
-          <ShareOffer {...offerShare(promo, lang, dict)} tone="dark" />
-        </div>
+      <div>
+        <p className="t-eyebrow">
+          {promo.heading[lang]} · {promo.label[lang]}
+        </p>
+        <h2 className="mt-2.5 font-display text-[28px] leading-[1.1] text-balance lg:text-[length:clamp(28px,2.8vw,36px)]">
+          {promo.title[lang]}
+        </h2>
+        <p className="mt-2.5 max-w-[560px] text-[14px] leading-[1.65] text-offer-text">{promo.body[lang]}</p>
 
-        {hasAside ? (
-          <div className="flex flex-col justify-center bg-ink-raised px-7 py-12 lg:px-11 lg:py-14">
-            {promo.steps.length > 0 ? (
-              <ol>
-                {promo.steps.map((step, i) => (
-                  <li
-                    key={i}
-                    className="flex gap-[18px] border-b border-rule-dark py-[22px] first:pt-0 last:border-b-0 last:pb-0"
-                  >
-                    <span className="font-mono text-[13px] leading-[1.5] font-light text-clay">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-[15px] leading-[1.6] font-light text-on-dark-body">
-                      {step[lang]}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            ) : null}
-            {promo.valueDOP !== null ? (
-              <div className={promo.steps.length > 0 ? "mt-[34px] border-t border-rule-dark pt-[22px]" : ""}>
-                <p className="text-[12px] leading-none font-light tracking-[0.16em] uppercase text-on-dark-label">
-                  {dict.promo.value}
-                </p>
-                <p className="mt-2 font-display text-[32px] leading-none font-light text-blush-300">
-                  {formatPrice(promo.valueDOP)}
-                </p>
-              </div>
-            ) : null}
-          </div>
+        {promo.steps.length > 0 ? (
+          <ol className="mt-5.5 grid gap-3 border-t border-rule-stat pt-4.5 sm:grid-cols-3 sm:gap-5.5">
+            {promo.steps.map((step, i) => (
+              <li key={i} className="flex gap-3 text-[13px] leading-[1.5]">
+                <span className="font-mono text-[12px] text-accent">{String(i + 1).padStart(2, "0")}</span>
+                <span>{step[lang]}</span>
+              </li>
+            ))}
+          </ol>
         ) : null}
+
+        <div className="mt-5.5 flex flex-wrap items-start justify-between gap-x-6 gap-y-3">
+          {smallPrint ? <p className="t-label mt-3 text-muted">{smallPrint}</p> : <span />}
+          <ShareOffer {...offerShare(promo, lang, dict)} tone="light" className="" />
+        </div>
+      </div>
+
+      <div className="flex flex-col items-start gap-2.5 md:col-span-2 lg:col-span-1 lg:items-center lg:text-center">
+        <WhatsAppCTA
+          label={dict.promo.cta}
+          variant="solid"
+          prefill={dict.promo.prefill.replace("{offer}", promo.title[lang])}
+          arrow
+        />
+        <p className="text-[11px] leading-[1.5] text-offer-text">{dict.promo.caption}</p>
       </div>
     </article>
   );

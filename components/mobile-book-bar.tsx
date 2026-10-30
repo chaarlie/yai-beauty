@@ -7,14 +7,15 @@ import { whatsappUrl } from "@/lib/whatsapp";
  */
 export function MobileBookBar({ label, prefill }: { label: string; prefill?: string }) {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-30 border-t border-rule-dark bg-ink px-4 py-3 nav:hidden">
+    <div className="fixed inset-x-0 bottom-0 z-30 border-t border-rule bg-cream px-5 pt-2.5 pb-[calc(10px+env(safe-area-inset-bottom))] nav:hidden">
       <a
         href={whatsappUrl(prefill)}
         target="_blank"
         rel="noopener noreferrer"
-        className="t-button flex min-h-11 items-center justify-center bg-clay px-6 py-3.5 text-white hover:bg-[#a8776d] hover:text-white"
+        className="t-button-sm flex min-h-12 items-center justify-center gap-6 bg-ink px-6 py-3.5 text-white hover:bg-[#574238] hover:text-white"
       >
         {label}
+        <span aria-hidden="true">↗</span>
       </a>
     </div>
   );

@@ -49,7 +49,7 @@ export function Hero({ dict, lang, treatmentCount, promos }: Props) {
       <section className="section-x">
         <div className="grid items-center gap-10 pt-10 pb-12 lg:grid-cols-[1.04fr_1fr] lg:gap-16 lg:pt-12 lg:pb-14 min-[1450px]:gap-24">
           <div>
-            <p className="t-eyebrow anim-rise flex items-center gap-3 before:h-px before:w-7 before:bg-clay">
+            <p className="t-eyebrow eyebrow-rule anim-rise">
               {hero.eyebrow}
             </p>
             <h1

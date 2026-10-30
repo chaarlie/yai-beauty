@@ -1,42 +1,29 @@
-import type { Business } from "@/lib/content";
+import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/lib/dictionaries";
+import { otherLocale } from "@/lib/i18n";
+import { Wordmark } from "./site-header";
 
-export function SiteFooter({ business, dict }: { business: Business; dict: Dictionary }) {
-  const { address } = business;
+/**
+ * The proposal's quiet footer. Links are absolute, so they work from an offer's
+ * own page as well as from home; the studio's details live in the contact band.
+ */
+export function SiteFooter({ lang, dict }: { lang: Locale; dict: Dictionary }) {
+  const home = `/${lang}/`;
 
   return (
-    <footer
-      id="contacto"
-      className="section-x flex flex-col gap-8 bg-blush-50 py-14 sm:flex-row sm:items-start sm:justify-between"
-    >
-      <div>
-        <p className="font-display text-[20px] leading-none tracking-[0.18em] uppercase">
-          {business.name}
-        </p>
-        <address className="mt-3 text-[15px] leading-[1.9] font-light text-tertiary not-italic">
-          {address.street}
-          <br />
-          {address.building}, {address.city}, R.D.
-        </address>
+    <footer className="section-x py-7">
+      <div className="flex flex-wrap items-center justify-between gap-5 text-[12px] leading-[1.6] text-muted">
+        <Wordmark href={`${home}#top`} />
+        <span>{dict.footer.tagline}</span>
+        <div className="flex flex-wrap gap-x-5.5 gap-y-2">
+          <a href={`${home}#tratamientos`}>{dict.nav.services}</a>
+          <a href={`${home}#precios`}>{dict.nav.prices}</a>
+          <a href={`${home}#contacto`}>{dict.nav.contact}</a>
+          <a href={`/${otherLocale[lang]}/`} hrefLang={otherLocale[lang]} lang={otherLocale[lang]}>
+            {dict.footer.otherLanguage}
+          </a>
+        </div>
       </div>
-
-      <ul className="text-[15px] leading-[1.9] font-light text-tertiary sm:text-right">
-        <li>
-          <a href={business.whatsapp} target="_blank" rel="noopener noreferrer" aria-label={dict.footer.phoneLabel}>
-            {business.phoneDisplay}
-          </a>
-        </li>
-        <li>
-          <a href={`mailto:${business.email}`} aria-label={dict.footer.emailLabel}>
-            {business.email}
-          </a>
-        </li>
-        <li>
-          <a href={business.instagramUrl} target="_blank" rel="noopener noreferrer">
-            {dict.footer.instagramLabel} {business.instagram}
-          </a>
-        </li>
-      </ul>
     </footer>
   );
 }
