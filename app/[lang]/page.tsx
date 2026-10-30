@@ -14,7 +14,6 @@ import { isLocale } from "@/lib/i18n";
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
 import { PromoCard } from "@/components/promo-card";
-import { PromoTeaser } from "@/components/promo-teaser";
 import { ServiceList } from "@/components/service-list";
 import { ResultsGallery } from "@/components/results-gallery";
 import { About } from "@/components/about";
@@ -65,9 +64,8 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         },
       }).replace(/</g, "\\u003c") }} />
       <main>
-        {promos.length > 0 ? <PromoTeaser promos={promos} lang={lang} dict={dict} /> : null}
-
-        <Hero dict={dict} treatmentCount={services.length} />
+        {/* The offers live in the hero now, in place of its photo. */}
+        <Hero dict={dict} lang={lang} treatmentCount={services.length} promos={promos} />
 
         {/* Section order tracks the nav's left-to-right order (Servicios, Ofertas,
             …) so the header underline steps through the menu in sequence as you

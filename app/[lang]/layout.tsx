@@ -1,6 +1,6 @@
 import { siteUrl } from "@/lib/site";
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Jost } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { getDictionary } from "@/lib/dictionaries";
 import { getBusiness } from "@/lib/content";
 import { isLocale, locales } from "@/lib/i18n";
@@ -16,9 +16,9 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-const jost = Jost({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-jost",
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
@@ -63,7 +63,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   if (!isLocale(lang)) notFound();
 
   return (
-    <html lang={lang} className={`${cormorant.variable} ${jost.variable}`}>
+    <html lang={lang} className={`${cormorant.variable} ${dmSans.variable}`}>
       {/* Bottom padding clears the fixed mobile WhatsApp bar. */}
       <body className="pb-[76px] nav:pb-0">{children}</body>
     </html>

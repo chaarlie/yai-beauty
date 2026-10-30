@@ -64,14 +64,18 @@ export default async function OfferPage({ params }: PageProps<"/[lang]/ofertas/[
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-rule bg-cream/95 backdrop-blur-sm">
-        <div className="flex items-center justify-between gap-6 px-6 py-4 lg:px-14 lg:py-[26px]">
+        <div className="section-x flex items-center justify-between gap-6 py-3.5 lg:min-h-[86px]">
           <Wordmark href={`/${lang}/`} />
-          <WhatsAppCTA label={dict.nav.book} variant="solid" />
+          <WhatsAppCTA label={dict.nav.book} variant="solid" arrow />
         </div>
       </header>
 
       <main>
-        <PromoTeaser promos={[promo]} lang={lang} dict={dict} />
+        <section className="section-x py-10 lg:py-14">
+          <div className="mx-auto max-w-[620px]">
+            <PromoTeaser promos={[promo]} lang={lang} dict={dict} />
+          </div>
+        </section>
         <PromoCard promo={promo} lang={lang} dict={dict} />
         <p className="section-x border-t border-rule py-12 text-center">
           <a href={`/${lang}/`} className="t-button inline-flex min-h-11 items-center border-b border-ink px-1 hover:border-clay">
