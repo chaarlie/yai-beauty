@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { getDictionary } from "@/lib/dictionaries";
-import { getBusiness, getPromoById, getPromos } from "@/lib/content";
+import { getBusiness, getPromoById, getPromos, getServices, serviceName } from "@/lib/content";
 import { isLocale } from "@/lib/i18n";
 import { offerPath } from "@/lib/offers";
+import { Contact } from "@/components/contact";
 import { MobileBookBar } from "@/components/mobile-book-bar";
 import { PromoCard } from "@/components/promo-card";
 import { PromoTeaser } from "@/components/promo-teaser";
@@ -58,7 +59,7 @@ export default async function OfferPage({ params }: PageProps<"/[lang]/ofertas/[
   // Over, hidden or deleted: a link someone shared still lands on the offers.
   if (!promo) redirect(`/${lang}/#ofertas`);
 
-  const dict = await getDictionary(lang);
+  const [dict, services] = await Promise.all([getDictionary(lang), getServices()]);
   const business = getBusiness();
 
   return (
@@ -76,16 +77,24 @@ export default async function OfferPage({ params }: PageProps<"/[lang]/ofertas/[
             <PromoTeaser promos={[promo]} lang={lang} dict={dict} />
           </div>
         </section>
-        <PromoCard promo={promo} lang={lang} dict={dict} />
-        <p className="section-x border-t border-rule py-12 text-center">
-          <a href={`/${lang}/`} className="t-button inline-flex min-h-11 items-center border-b border-ink px-1 hover:border-clay">
+        <div className="section-x">
+          <PromoCard promo={promo} lang={lang} dict={dict} />
+        </div>
+        <p className="section-x py-12 text-center">
+          <a href={`/${lang}/`} className="t-button-sm inline-flex min-h-11 items-center gap-5 border-b border-ink hover:border-clay hover:text-inherit">
             {dict.promo.page.allOffers}
+            <span aria-hidden="true">→</span>
           </a>
         </p>
+        <Contact
+          business={business}
+          dict={dict}
+          options={services.map((service) => ({ slug: service.slug, name: serviceName(service, lang) }))}
+        />
       </main>
 
-      <SiteFooter business={business} dict={dict} />
-      <MobileBookBar label={dict.nav.book} prefill={dict.promo.prefill.replace("{offer}", promo.title[lang])} />
+      <SiteFooter lang={lang} dict={dict} />
+      <MobileBookBar label={dict.nav.bookLong} prefill={dict.promo.prefill.replace("{offer}", promo.title[lang])} />
     </>
   );
 }

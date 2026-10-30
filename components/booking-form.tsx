@@ -36,7 +36,9 @@ const getHydratedSnapshot = () => true;
 const getServerSnapshot = () => false;
 
 const FIELD =
-  "w-full min-h-11 border-b border-on-dark-field bg-transparent px-0.5 py-3.5 text-[15px] font-light text-cream placeholder:text-on-dark-caption focus-visible:border-clay focus-visible:outline-none";
+  "w-full min-h-11 border-b border-on-dark-field bg-transparent px-0.5 py-3 text-[15px] tracking-normal text-cream normal-case transition-colors focus-visible:border-blush-300 focus-visible:outline-none";
+// Visible labels over each field, small and spaced as in the proposal.
+const LABEL = "flex flex-col gap-2 text-[10px] leading-none tracking-[0.18em] text-on-dark-intro uppercase";
 
 function buildMessage(copy: BookingCopy, values: Record<string, string>): string {
   const lines = [copy.prefillIntro, ""];
@@ -53,7 +55,8 @@ function buildMessage(copy: BookingCopy, values: Record<string, string>): string
  * the deep link. Validation is client-side and deliberately forgiving.
  *
  * The fields are uncontrolled: nothing here needs to re-render per keystroke,
- * so the only state is the error the user has to see.
+ * so the only state is the error the user has to see. It sits on the dark
+ * contact band, which carries the heading and introduction.
  */
 export function BookingForm({ options, copy, whatsapp }: Props) {
   const [error, setError] = useState<string | null>(null);
@@ -100,55 +103,43 @@ export function BookingForm({ options, copy, whatsapp }: Props) {
   }
 
   return (
-    <div className="bg-ink px-7 py-12 text-cream lg:px-12 lg:py-13">
-      <h2 className="font-display text-[30px] leading-[1.1] font-light lg:text-[40px]">
-        {copy.heading}
-      </h2>
-      <p className="mt-4 mb-8 text-[15px] leading-[1.7] font-light text-on-dark-intro">
-        {copy.intro}
-      </p>
-
-      <form onSubmit={handleSubmit} noValidate className="grid gap-3.5 sm:grid-cols-2">
-        <input name="name" type="text" required placeholder={copy.name} aria-label={copy.name} className={FIELD} />
-        <input
-          name="phone"
-          type="tel"
-          required
-          inputMode="tel"
-          autoComplete="tel"
-          placeholder={copy.phone}
-          aria-label={copy.phone}
-          className={FIELD}
-        />
-        <select name="treatment" aria-label={copy.treatment} defaultValue="" className={`${FIELD} sm:col-span-2`}>
-          <option value="" className="text-ink">
-            {copy.treatment}
-          </option>
+    <form onSubmit={handleSubmit} noValidate className="mt-8 grid gap-x-5.5 gap-y-4.5 sm:grid-cols-2">
+      <label className={LABEL}>
+        {copy.name}
+        <input name="name" type="text" required autoComplete="name" className={FIELD} />
+      </label>
+      <label className={LABEL}>
+        {copy.phone}
+        <input name="phone" type="tel" required inputMode="tel" autoComplete="tel" className={FIELD} />
+      </label>
+      <label className={`${LABEL} sm:col-span-2`}>
+        {copy.treatment}
+        <select name="treatment" defaultValue="" className={FIELD}>
+          <option value="" className="text-ink" />
           {options.map((option) => (
             <option key={option.slug} value={option.name} className="text-ink">
               {option.name}
             </option>
           ))}
         </select>
-        <textarea
-          name="message"
-          placeholder={copy.message}
-          aria-label={copy.message}
-          className={`${FIELD} h-16 resize-none leading-[1.6] sm:col-span-2`}
-        />
+      </label>
+      <label className={`${LABEL} sm:col-span-2`}>
+        {copy.message}
+        <textarea name="message" className={`${FIELD} h-20 resize-y leading-[1.6]`} />
+      </label>
 
-        <p aria-live="polite" className="sm:col-span-2 empty:hidden text-[13px] font-light text-blush-300">
-          {error ?? (sent ? copy.opening : "")}
-        </p>
+      <p aria-live="polite" className="text-[13px] text-blush-300 empty:hidden sm:col-span-2">
+        {error ?? (sent ? copy.opening : "")}
+      </p>
 
-        <button
-          type="submit"
-          disabled={!ready}
-          className="t-button mt-3.5 min-h-11 w-full bg-clay px-6 py-[18px] tracking-[0.18em] text-white transition-colors duration-100 hover:bg-[#a8776d] disabled:cursor-default sm:col-span-2"
-        >
-          {copy.submit}
-        </button>
-      </form>
-    </div>
+      <button
+        type="submit"
+        disabled={!ready}
+        className="t-button-sm inline-flex min-h-12 items-center justify-center gap-6 justify-self-start bg-blush-300 px-[23px] py-3.5 text-ink transition-[background-color,translate] duration-200 hover:-translate-y-0.5 hover:bg-white disabled:cursor-default sm:col-span-2"
+      >
+        {copy.submit}
+        <span aria-hidden="true">↗</span>
+      </button>
+    </form>
   );
 }

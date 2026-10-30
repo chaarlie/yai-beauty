@@ -21,7 +21,10 @@
   "hero": {
     "eyebrow": "Sosúa, Dominican Republic",
     "title": "Your skin, your perfect frame",
-    "titleLines": ["Your skin,", "your perfect"],
+    "titleLines": [
+      "Your skin,",
+      "your perfect"
+    ],
     "titleAccent": "frame.",
     "body": "Personalized facial and body treatments. Every visit begins with a free skin evaluation — the plan is built from what we find.",
     "primaryCta": "WhatsApp Yai",
@@ -77,12 +80,17 @@
     "heading": "Treatments",
     "intro": "Facials, body care, hair removal, brows and lashes — all by appointment only.",
     "allHeading": "All treatments",
+    "pricesNote": "Prices per session, in Dominican pesos.",
+    "perSession": "/ session",
+    "count": "{n} treatments",
+    "countOne": "1 treatment",
     "benefits": "Benefits",
     "cta": "Book this treatment",
     "ctaPrefill": "Hi Yai, I'm interested in this treatment: "
   },
   "results": {
     "heading": "Results",
+    "eyebrow": "Before and after",
     "caption": "Real clients, with permission",
     "before": "Before",
     "after": "After"
@@ -126,10 +134,34 @@
       }
     ],
     "closing": "Your skin does not simply need a treatment. It needs to be understood, evaluated and cared for in a personalized way.",
+    "readMore": "Read more",
+    "signature": "Yasmín",
+    "signatureRole": "Cosmiatrist and esthetics professional",
     "photoLabel": "Yai carefully working on a client’s face"
+  },
+  "visit": {
+    "eyebrow": "Your first visit",
+    "steps": [
+      {
+        "label": "01 / Book",
+        "title": "Message us on WhatsApp.",
+        "body": "Check availability and arrange your appointment. We see clients by appointment only, so each session gets its full time."
+      },
+      {
+        "label": "02 / Evaluation",
+        "title": "First, we get to know your skin.",
+        "body": "The initial evaluation is free: we look at texture, sensitivity, hydration and pigmentation, and complete your clinical record before choosing a treatment."
+      },
+      {
+        "label": "03 / At home",
+        "title": "The care continues.",
+        "body": "After every treatment we guide you on the products and habits that help maintain and improve your results at home."
+      }
+    ]
   },
   "faq": {
     "heading": "Before your visit",
+    "eyebrow": "Questions",
     "items": [
       {
         "q": "Do I need an appointment?",
@@ -163,9 +195,11 @@
     "prefillMessage": "Note"
   },
   "footer": {
-    "phoneLabel": "Call or message on WhatsApp",
-    "emailLabel": "Send an email",
-    "instagramLabel": "Instagram"
+    "instagramLabel": "Instagram",
+    "tagline": "Your skin, your perfect frame · Sosúa, Dominican Republic",
+    "otherLanguage": "Español",
+    "appointments": "By appointment only.",
+    "country": "Dominican Republic"
   },
   "mobileBar": {
     "cta": "Message Yai on WhatsApp"

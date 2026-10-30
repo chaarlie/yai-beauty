@@ -21,7 +21,10 @@
   "hero": {
     "eyebrow": "Sosúa, República Dominicana",
     "title": "Tu piel, tu marco perfecto",
-    "titleLines": ["Tu piel,", "tu marco"],
+    "titleLines": [
+      "Tu piel,",
+      "tu marco"
+    ],
     "titleAccent": "perfecto.",
     "body": "Tratamientos faciales y corporales personalizados. Cada visita comienza con una evaluación de piel gratuita, y el plan se construye a partir de ella.",
     "primaryCta": "Escríbele a Yai",
@@ -77,12 +80,17 @@
     "heading": "Tratamientos",
     "intro": "Faciales, corporales, depilación, cejas y pestañas — atención únicamente mediante citas.",
     "allHeading": "Todos los tratamientos",
+    "pricesNote": "Precios por sesión, en pesos dominicanos.",
+    "perSession": "/ sesión",
+    "count": "{n} tratamientos",
+    "countOne": "1 tratamiento",
     "benefits": "Beneficios",
     "cta": "Reservar este tratamiento",
     "ctaPrefill": "Hola Yai, me interesa el tratamiento: "
   },
   "results": {
     "heading": "Resultados",
+    "eyebrow": "Antes y después",
     "caption": "Clientas reales, con autorización",
     "before": "Antes",
     "after": "Después"
@@ -126,10 +134,34 @@
       }
     ],
     "closing": "Tu piel no necesita simplemente un tratamiento. Necesita ser comprendida, evaluada y cuidada de manera personalizada.",
+    "readMore": "Leer más",
+    "signature": "Yasmín",
+    "signatureRole": "Cosmiatra y profesional de la estética",
     "photoLabel": "Yai trabajando con atención en el rostro de una clienta"
+  },
+  "visit": {
+    "eyebrow": "Tu primera visita",
+    "steps": [
+      {
+        "label": "01 / Reserva",
+        "title": "Escríbenos por WhatsApp.",
+        "body": "Consulta disponibilidad y coordina tu cita. Atendemos únicamente mediante citas, para dedicarle a cada sesión su tiempo completo."
+      },
+      {
+        "label": "02 / Evaluación",
+        "title": "Primero, conocemos tu piel.",
+        "body": "La evaluación inicial es gratuita: observamos textura, sensibilidad, hidratación y pigmentación, y completamos tu ficha clínica antes de elegir el tratamiento."
+      },
+      {
+        "label": "03 / En casa",
+        "title": "El cuidado continúa.",
+        "body": "Después de cada tratamiento te orientamos sobre los productos y hábitos que ayudan a mantener y mejorar tus resultados en casa."
+      }
+    ]
   },
   "faq": {
     "heading": "Antes de tu visita",
+    "eyebrow": "Preguntas",
     "items": [
       {
         "q": "¿Necesito cita?",
@@ -163,9 +195,11 @@
     "prefillMessage": "Nota"
   },
   "footer": {
-    "phoneLabel": "Llamar o escribir por WhatsApp",
-    "emailLabel": "Enviar un correo",
-    "instagramLabel": "Instagram"
+    "instagramLabel": "Instagram",
+    "tagline": "Tu piel, tu marco perfecto · Sosúa, República Dominicana",
+    "otherLanguage": "English",
+    "appointments": "Atención únicamente mediante citas.",
+    "country": "República Dominicana"
   },
   "mobileBar": {
     "cta": "Escríbele a Yai por WhatsApp"
