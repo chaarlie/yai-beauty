@@ -16,7 +16,8 @@ type Props = {
 
 /**
  * Modelled on the printed catalog: the treatments worth a photograph get a full
- * row with the image alternating side to side, and the rest are grouped by
+ * row with the image alternating side to side — name, price and what the
+ * treatment does beside the photo — and the rest are grouped by
  * category as a priced list. Names come from `serviceDisplayName`, which prefers
  * the catalog's headline over the functional name.
  */
@@ -52,11 +53,27 @@ function FeaturedRow({
         {service.note ? (
           <p className="t-label mt-4 text-muted">{service.note[lang]}</p>
         ) : null}
+        {service.benefits.length > 0 ? (
+          <>
+            <p className="t-label mt-8 text-muted">{dict.treatments.benefits}</p>
+            <ul className="mt-4 max-w-[460px]">
+              {service.benefits.map((benefit, i) => (
+                <li
+                  key={i}
+                  className="flex gap-4 border-b border-rule py-3 first:pt-0 last:border-b-0 last:pb-0"
+                >
+                  <span aria-hidden="true" className="mt-[0.8em] h-px w-3 shrink-0 bg-clay" />
+                  <span className="text-[15px] leading-[1.6] font-light text-secondary">{benefit[lang]}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : null}
         <WhatsAppCTA
           label={dict.treatments.cta}
           variant="text"
           prefill={`${dict.treatments.ctaPrefill}${name}`}
-          className="mt-6"
+          className={service.benefits.length > 0 ? "mt-8" : "mt-6"}
         />
       </div>
     </article>

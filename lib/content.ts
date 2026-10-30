@@ -26,6 +26,8 @@ export type Service = {
   display?: { es: string; en: string };
   price: number;
   note?: { es: string; en: string };
+  /** What it does for the skin, one line each; empty until Yasmin writes them. */
+  benefits: { es: string; en: string }[];
   /** Carries a photo row in the catalog. */
   featured?: boolean;
   /**
@@ -117,6 +119,7 @@ function toService(doc: ServiceDoc): Service {
     ...(doc.display ? { display: both(doc.display) } : {}),
     price: doc.price,
     ...(doc.note ? { note: both(doc.note) } : {}),
+    benefits: (doc.benefits ?? []).map(both),
     featured: doc.featured === true,
     ...(doc.image ? { image: imageUrl(doc.image) } : {}),
     ...(doc.imageFocus ? { imageFocus: doc.imageFocus } : {}),

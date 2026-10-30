@@ -14,7 +14,8 @@ The public site can run without Sanity credentials; promotions are then hidden. 
 
 ## Content and photos
 
-- `lib/services.json`: treatment names, prices in DOP, business contact details and result-photo consent dates.
+- Sanity `service` documents: treatment names, prices in DOP and benefits, edited at `/admin/services/`. Benefits show beside the photo of treatments that have one.
+- `lib/services.json`: categories, business contact details and result-photo consent dates.
 - `dictionaries/es.json` and `dictionaries/en.json`: interface copy.
 - `lib/content.ts`: content access and the public Supabase photo bucket.
 - Sanity `offer` documents: promotions edited through `/admin/`; Spanish text is required, English falls back to Spanish.

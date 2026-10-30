@@ -33,19 +33,27 @@ export type ServiceSave = { id: string; rev: string; input: ServiceInput } | { i
 
 const localeString = (text: Localized) => ({ _type: "localeString", ...text });
 
+/** Sanity needs a `_key` on every object in an array; nothing refers to one between saves. */
+const localeItem = (text: Localized) => ({ ...localeString(text), _key: randomUUID().replace(/-/g, "").slice(0, 12) });
+
 function fields(input: ServiceInput) {
   return {
     category: input.category,
     name: localeString(input.name),
     ...(input.display ? { display: localeString(input.display) } : {}),
     ...(input.note ? { note: localeString(input.note) } : {}),
+    ...(input.benefits.length ? { benefits: input.benefits.map(localeItem) } : {}),
     price: input.price,
     active: input.active,
   };
 }
 
 function emptied(input: ServiceInput): string[] {
-  return [...(input.display ? [] : ["display"]), ...(input.note ? [] : ["note"])];
+  return [
+    ...(input.display ? [] : ["display"]),
+    ...(input.note ? [] : ["note"]),
+    ...(input.benefits.length ? [] : ["benefits"]),
+  ];
 }
 
 /**
