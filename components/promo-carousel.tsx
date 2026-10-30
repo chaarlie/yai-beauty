@@ -87,7 +87,9 @@ export function PromoCarousel({ ids, slides, labels }: Props) {
     <section
       aria-roledescription="carousel"
       aria-label={labels.label}
-      className="relative touch-pan-y border-b border-rule"
+      // The panel is the section's own, so a change of slide moves the offer
+      // across it rather than the panel with it.
+      className="promo-panel relative touch-pan-y overflow-x-clip"
       // Keyboard focus only: a mouse click focuses the folder or a share button
       // too, and that shouldn't freeze the carousel.
       onFocus={(event) => {
@@ -122,7 +124,11 @@ export function PromoCarousel({ ids, slides, labels }: Props) {
       </div>
 
       {count > 1 ? (
-        <div className="section-x flex flex-wrap items-center justify-between gap-4 pb-8 lg:pb-10" onKeyDown={onKeyDown}>
+        // Along the panel's foot: where the offer is on the left, moving on on the right.
+        <div
+          className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-rule px-3 py-2 sm:px-5"
+          onKeyDown={onKeyDown}
+        >
           <div className="flex items-center">
             {ids.map((id, i) => (
               <button
@@ -138,7 +144,7 @@ export function PromoCarousel({ ids, slides, labels }: Props) {
                 />
               </button>
             ))}
-            <span className="t-label ml-2 text-muted" aria-hidden="true">
+            <span className="t-label ml-1 text-muted" aria-hidden="true">
               {index + 1} / {count}
             </span>
           </div>
@@ -167,7 +173,7 @@ function ArrowButton({ label, onClick, glyph }: { label: string; onClick: () => 
       type="button"
       onClick={onClick}
       aria-label={label}
-      className="grid size-11 place-items-center rounded-full border border-rule-button text-[18px] text-ink transition-colors hover:border-clay"
+      className="grid size-11 place-items-center rounded-full border border-rule-button text-[18px] text-ink transition-colors hover:border-clay hover:bg-cream"
     >
       <span aria-hidden="true">{glyph}</span>
     </button>

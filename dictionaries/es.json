@@ -12,17 +12,22 @@
     "contact": "Contacto",
     "mainNav": "Navegación principal",
     "book": "Reservar",
+    "bookLong": "Reservar por WhatsApp",
+    "announcement": "Evaluación de piel gratuita · Atención solo con cita previa",
     "openMenu": "Abrir menú",
     "closeMenu": "Cerrar menú",
     "toggleLang": "Cambiar a inglés"
   },
   "hero": {
     "eyebrow": "Sosúa, República Dominicana",
-    "title": "Tu piel, tú marco perfecto",
+    "title": "Tu piel, tu marco perfecto",
+    "titleLines": ["Tu piel,", "tu marco"],
+    "titleAccent": "perfecto.",
     "body": "Tratamientos faciales y corporales personalizados. Cada visita comienza con una evaluación de piel gratuita, y el plan se construye a partir de ella.",
     "primaryCta": "Escríbele a Yai",
     "secondaryCta": "Ver tratamientos",
     "prefill": "Hola Yai, quisiera información sobre tus tratamientos.",
+    "note": "Evaluación inicial gratuita · Atención con cita previa",
     "photoLabel": "Yai atendiendo a una clienta en su cabina de estética",
     "stats": {
       "yearsValue": "7+",
@@ -72,6 +77,7 @@
     "heading": "Tratamientos",
     "intro": "Faciales, corporales, depilación, cejas y pestañas — atención únicamente mediante citas.",
     "allHeading": "Todos los tratamientos",
+    "benefits": "Beneficios",
     "cta": "Reservar este tratamiento",
     "ctaPrefill": "Hola Yai, me interesa el tratamiento: "
   },

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Jost } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import "../globals.css";
 
 /*
@@ -15,9 +15,9 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-const jost = Jost({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-jost",
+  variable: "--font-dm-sans",
   display: "swap",
 });
 
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${cormorant.variable} ${jost.variable}`}>
+    <html lang="es" className={`${cormorant.variable} ${dmSans.variable}`}>
       <body className="min-h-dvh bg-cream text-ink">{children}</body>
     </html>
   );

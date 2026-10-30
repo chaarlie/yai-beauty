@@ -7,7 +7,7 @@ const base = { category: 'facial', name: { es: 'Facial profundo' }, price: 2000 
 test('a minimal service is valid and defaults to shown', () => {
   const parsed = parseServiceInput(base);
   assert.equal(parsed.ok, true);
-  assert.deepEqual(parsed.value, { ...base, display: null, note: null, active: true });
+  assert.deepEqual(parsed.value, { ...base, display: null, note: null, benefits: [], active: true });
 });
 
 test('service validation names the field that is wrong', () => {
@@ -22,6 +22,10 @@ test('service validation names the field that is wrong', () => {
     [{ ...base, category: 'unas' }, 'category'],
     [{ ...base, note: { en: 'Women only' } }, 'note.es'],
     [{ ...base, active: 'yes' }, 'active'],
+    [{ ...base, benefits: 'Suaviza la piel' }, 'benefits'],
+    [{ ...base, benefits: Array(7).fill({ es: 'Suaviza' }) }, 'benefits'],
+    [{ ...base, benefits: [{ es: 'Suaviza' }, { en: 'Softens' }] }, 'benefits.1.es'],
+    [{ ...base, benefits: [{ es: 'x'.repeat(161) }] }, 'benefits.0.es'],
   ];
   for (const [input, field] of cases) {
     const parsed = parseServiceInput(input);
@@ -35,6 +39,15 @@ test('blank optional texts are dropped and English is optional', () => {
   assert.equal(parsed.ok, true);
   assert.equal(parsed.value.display, null);
   assert.deepEqual(parsed.value.note, { es: 'Solo mujeres' });
+});
+
+test('blank benefits are dropped and the rest keep their order', () => {
+  const parsed = parseServiceInput({
+    ...base,
+    benefits: [{ es: ' Limpia los poros ', en: 'Clears pores' }, { es: '', en: ' ' }, { es: 'Suaviza', en: '' }],
+  });
+  assert.equal(parsed.ok, true);
+  assert.deepEqual(parsed.value.benefits, [{ es: 'Limpia los poros', en: 'Clears pores' }, { es: 'Suaviza' }]);
 });
 
 test('new slugs come from the Spanish name and never collide', () => {

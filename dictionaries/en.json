@@ -12,6 +12,8 @@
     "contact": "Contact",
     "mainNav": "Main navigation",
     "book": "Book",
+    "bookLong": "Book on WhatsApp",
+    "announcement": "Free skin evaluation · By appointment only",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "toggleLang": "Switch to Spanish"
@@ -19,10 +21,13 @@
   "hero": {
     "eyebrow": "Sosúa, Dominican Republic",
     "title": "Your skin, your perfect frame",
+    "titleLines": ["Your skin,", "your perfect"],
+    "titleAccent": "frame.",
     "body": "Personalized facial and body treatments. Every visit begins with a free skin evaluation — the plan is built from what we find.",
     "primaryCta": "WhatsApp Yai",
     "secondaryCta": "See treatments",
     "prefill": "Hi Yai, I'd like information about your treatments.",
+    "note": "Free initial evaluation · By appointment only",
     "photoLabel": "Yai caring for a client in her treatment room",
     "stats": {
       "yearsValue": "7+",
@@ -72,6 +77,7 @@
     "heading": "Treatments",
     "intro": "Facials, body care, hair removal, brows and lashes — all by appointment only.",
     "allHeading": "All treatments",
+    "benefits": "Benefits",
     "cta": "Book this treatment",
     "ctaPrefill": "Hi Yai, I'm interested in this treatment: "
   },

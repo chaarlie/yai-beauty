@@ -1,13 +1,10 @@
-import type { CSSProperties } from "react";
 import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { Promo } from "@/lib/content";
 import { formatPrice } from "@/lib/content";
 import { formatDay } from "@/lib/offers";
-import { offerShare } from "./offer-share";
 import { PromoCarousel } from "./promo-carousel";
 import { PromoFolder } from "./promo-folder";
-import { ShareOffer } from "./share-offer";
 import { WhatsAppCTA } from "./whatsapp-cta";
 
 type Props = {
@@ -17,9 +14,10 @@ type Props = {
 };
 
 /**
- * The offers, first thing on the page: each one a short pitch beside the folder
- * that holds its coupon, shown one at a time. Each points down to its full card
- * for the steps — both read the same `promo`, so they never disagree.
+ * The offers, in the hero where the proposal has its photo: the folder that
+ * holds each coupon, the offer's line under it and the way to claim it, shown
+ * one at a time. Each points down to its full card for the steps and sharing —
+ * both read the same `promo`, so they never disagree.
  *
  * The pitches are paragraphs, not headings, so the hero's h1 stays the page's
  * first heading.
@@ -41,34 +39,7 @@ function PromoSlide({ promo, lang, dict }: { promo: Promo; lang: Locale; dict: D
   const validity = promo.endsOn ? dict.promo.validUntil.replace("{date}", formatDay(promo.endsOn, lang)) : null;
 
   return (
-    <div className="section-x grid items-center gap-10 py-12 lg:grid-cols-[1fr_400px] lg:gap-16 lg:py-14">
-      <div>
-        <p className="t-eyebrow anim-rise">{promo.label[lang]}</p>
-        <p
-          className="anim-rise mt-5 max-w-[560px] font-display text-[30px] leading-[1.1] font-light text-balance lg:text-[44px]"
-          style={{ "--anim-delay": "0.08s" } as CSSProperties}
-        >
-          {promo.title[lang]}
-        </p>
-        <div
-          className="anim-rise mt-8 flex flex-wrap gap-4"
-          style={{ "--anim-delay": "0.16s" } as CSSProperties}
-        >
-          <WhatsAppCTA
-            label={dict.promo.cta}
-            variant="accent"
-            prefill={dict.promo.prefill.replace("{offer}", promo.title[lang])}
-          />
-          <a
-            href={`#oferta-${promo.id}`}
-            className="t-button inline-flex min-h-11 items-center border-b border-ink px-1 py-[18px] hover:border-clay"
-          >
-            {dict.promo.folder.howItWorks}
-          </a>
-        </div>
-        <ShareOffer {...offerShare(promo, lang, dict)} tone="light" />
-      </div>
-
+    <div className="flex flex-col items-center px-6 pt-6 pb-8 text-center sm:px-10 lg:pt-8 lg:pb-10">
       <PromoFolder
         cover={dict.nav.offers}
         note={validity}
@@ -79,6 +50,24 @@ function PromoSlide({ promo, lang, dict }: { promo: Promo; lang: Locale; dict: D
         openLabel={dict.promo.folder.open}
         closeLabel={dict.promo.folder.close}
       />
+      <p className="mt-2 max-w-[440px] font-display text-[26px] leading-[1.15] font-normal text-balance sm:text-[30px]">
+        {promo.title[lang]}
+      </p>
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
+        <WhatsAppCTA
+          label={dict.promo.cta}
+          variant="solid"
+          prefill={dict.promo.prefill.replace("{offer}", promo.title[lang])}
+          arrow
+        />
+        <a
+          href={`#oferta-${promo.id}`}
+          className="t-button-sm inline-flex min-h-11 items-center gap-5 border-b border-ink hover:border-clay hover:text-inherit"
+        >
+          {dict.promo.folder.howItWorks}
+          <span aria-hidden="true">↓</span>
+        </a>
+      </div>
     </div>
   );
 }
