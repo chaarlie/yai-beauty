@@ -16,7 +16,7 @@ export const SERVICE_TYPE = "service";
 /** Cache tag on every read of the catalog; /admin saves revalidate it. */
 export const SERVICES_TAG = "services";
 
-export const SERVICE_LIMITS = { name: 60, display: 80, note: 120, price: 1_000_000, batch: 100 } as const;
+export const SERVICE_LIMITS = { name: 60, display: 80, note: 120, benefit: 160, benefits: 6, price: 1_000_000, batch: 100 } as const;
 
 /**
  * A `service` document as SERVICE_PROJECTION returns it: absent fields come back
@@ -32,6 +32,7 @@ export type ServiceDoc = {
   name: Localized;
   display: Localized | null;
   note: Localized | null;
+  benefits: Localized[] | null;
   price: number;
   active: boolean | null;
   featured: boolean | null;
@@ -41,7 +42,7 @@ export type ServiceDoc = {
 };
 
 export const SERVICE_PROJECTION = /* groq */ `{
-  _id, _rev, slug, category, order, name, display, note, price,
+  _id, _rev, slug, category, order, name, display, note, benefits, price,
   active, featured, image, imageFocus, imageParallax
 }`;
 
@@ -53,6 +54,8 @@ export type ServiceInput = {
   /** The printed catalog's headline, where it differs from the plain name. */
   display: Localized | null;
   note: Localized | null;
+  /** What the treatment does for the skin, one line each — shown beside its photo. */
+  benefits: Localized[];
   price: number;
   /** False hides it from the price list and the booking form. */
   active: boolean;
@@ -106,6 +109,17 @@ function optionalText(raw: unknown, field: string, max: number, issues: Issues, 
   return en ? { es, en } : { es };
 }
 
+/** A list of optional texts; blank items are dropped. */
+function textList(raw: unknown, field: string, maxItems: number, maxChars: number, issues: Issues): Localized[] {
+  if (raw === undefined || raw === null) return [];
+  if (!Array.isArray(raw)) {
+    issues[field] = "Debe ser una lista";
+    return [];
+  }
+  if (raw.length > maxItems) issues[field] = `Máximo ${maxItems}`;
+  return raw.slice(0, maxItems).flatMap((item, i) => optionalText(item, `${field}.${i}`, maxChars, issues) ?? []);
+}
+
 /** Validates one service as /admin sends it. Unknown keys are ignored. */
 export function parseServiceInput(raw: unknown): ServiceParse {
   if (!isRecord(raw)) return { ok: false, issues: { _: "Se esperaba un objeto JSON" } };
@@ -114,6 +128,7 @@ export function parseServiceInput(raw: unknown): ServiceParse {
   const name = requiredText(raw.name, "name", SERVICE_LIMITS.name, issues);
   const display = optionalText(raw.display, "display", SERVICE_LIMITS.display, issues);
   const note = optionalText(raw.note, "note", SERVICE_LIMITS.note, issues);
+  const benefits = textList(raw.benefits, "benefits", SERVICE_LIMITS.benefits, SERVICE_LIMITS.benefit, issues);
 
   const category = raw.category;
   if (typeof category !== "string" || !(CATEGORY_IDS as readonly string[]).includes(category)) {
@@ -135,6 +150,7 @@ export function parseServiceInput(raw: unknown): ServiceParse {
       name,
       display,
       note,
+      benefits,
       price: price as number,
       active: raw.active !== false,
     },
@@ -173,6 +189,7 @@ export function docToAdminService(doc: ServiceDoc): AdminService {
     name: plain(doc.name),
     display: doc.display ? plain(doc.display) : null,
     note: doc.note ? plain(doc.note) : null,
+    benefits: (doc.benefits ?? []).map(plain),
     price: doc.price,
     active: doc.active !== false,
     featured: doc.featured === true,

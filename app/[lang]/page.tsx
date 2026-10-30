@@ -3,23 +3,24 @@ import { notFound } from "next/navigation";
 import { getDictionary } from "@/lib/dictionaries";
 import {
   getBusiness,
+  getCategories,
   getFeaturedServices,
   getPromos,
-  getRemainingByCategory,
   getResults,
   getServices,
+  getServicesByCategory,
   serviceName,
 } from "@/lib/content";
 import { isLocale } from "@/lib/i18n";
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
 import { PromoCard } from "@/components/promo-card";
-import { PromoTeaser } from "@/components/promo-teaser";
 import { ServiceList } from "@/components/service-list";
 import { ResultsGallery } from "@/components/results-gallery";
 import { About } from "@/components/about";
+import { FirstVisit } from "@/components/first-visit";
 import { FaqList } from "@/components/faq-list";
-import { BookingForm } from "@/components/booking-form";
+import { Contact } from "@/components/contact";
 import { SiteFooter } from "@/components/site-footer";
 import { MobileBookBar } from "@/components/mobile-book-bar";
 
@@ -31,7 +32,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const [services, featured, groups, promos, pairs] = await Promise.all([
     getServices(),
     getFeaturedServices(),
-    getRemainingByCategory(),
+    getServicesByCategory(),
     getPromos(),
     getResults(),
   ]);
@@ -65,17 +66,16 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         },
       }).replace(/</g, "\\u003c") }} />
       <main>
-        {promos.length > 0 ? <PromoTeaser promos={promos} lang={lang} dict={dict} /> : null}
+        {/* The offers live in the hero now, in place of its photo. */}
+        <Hero dict={dict} lang={lang} treatmentCount={services.length} promos={promos} />
 
-        <Hero dict={dict} treatmentCount={services.length} />
-
-        {/* Section order tracks the nav's left-to-right order (Servicios, Ofertas,
-            …) so the header underline steps through the menu in sequence as you
-            scroll. Treatments therefore precede the promo. */}
-        <ServiceList featured={featured} groups={groups} lang={lang} dict={dict} />
+        {/* Sections follow the nav's left-to-right order (Servicios, Precios,
+            Ofertas, …) so the header underline steps through the menu in
+            sequence as you scroll. */}
+        <ServiceList featured={featured} groups={groups} categories={getCategories()} lang={lang} dict={dict} />
 
         {promos.length > 0 ? (
-          <section id="ofertas" aria-label={dict.nav.offers}>
+          <section id="ofertas" aria-label={dict.nav.offers} className="section-x grid scroll-mt-28 gap-4 pb-6 lg:pb-10">
             {promos.map((promo) => (
               <PromoCard key={promo.id} promo={promo} lang={lang} dict={dict} />
             ))}
@@ -85,22 +85,17 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         {results.length > 0 ? <ResultsGallery items={results} dict={dict} /> : null}
 
         <About dict={dict} />
-
-        <section className="section-x grid gap-12 border-t border-rule py-16 lg:grid-cols-2 lg:gap-18 lg:py-22">
-          <FaqList items={dict.faq.items} dict={dict} />
-          <BookingForm
-            copy={dict.form}
-            whatsapp={business.whatsapp}
-            options={services.map((service) => ({
-              slug: service.slug,
-              name: serviceName(service, lang),
-            }))}
-          />
-        </section>
+        <FirstVisit dict={dict} />
+        <FaqList dict={dict} />
+        <Contact
+          business={business}
+          dict={dict}
+          options={services.map((service) => ({ slug: service.slug, name: serviceName(service, lang) }))}
+        />
       </main>
 
-      <SiteFooter business={business} dict={dict} />
-      <MobileBookBar label={dict.nav.book} prefill={dict.hero.prefill} />
+      <SiteFooter lang={lang} dict={dict} />
+      <MobileBookBar label={dict.nav.bookLong} prefill={dict.hero.prefill} />
     </>
   );
 }

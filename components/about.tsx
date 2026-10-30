@@ -2,63 +2,79 @@ import type { Dictionary } from "@/lib/dictionaries";
 import { imageUrl } from "@/lib/content";
 import { PhotoSlot } from "./photo-slot";
 
+/**
+ * Yasmín in her own words: the photo beside her introduction and signature,
+ * then her three chapters side by side — each opens on its first paragraph,
+ * the rest one tap away — and her closing line as a quote.
+ */
 export function About({ dict }: { dict: Dictionary }) {
   const { about } = dict;
 
   return (
-    <section id="sobre" className="section-x py-14 lg:py-24">
-      <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-        {/* Pinned identity block. `self-start` keeps it from stretching so it
-            can actually travel; it stays under the sticky header via top-24. */}
-        <div className="lg:sticky lg:top-24 lg:self-start">
-          <p className="reveal t-eyebrow">{about.eyebrow}</p>
-          <h2 className="fade-in mt-5 max-w-[420px] font-display text-[32px] leading-[1.15] font-light lg:mt-[22px] lg:text-[44px]">
-            {about.heading}
-          </h2>
+    <section id="sobre" className="section-x py-14 lg:py-22">
+      <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-22">
+        <div className="relative">
           <PhotoSlot
             label={about.photoLabel}
             src={imageUrl("salon-areas/20261012_0092.webp")}
             revealVariant="calm"
             parallax={false}
             focus="50% 35%"
-            className="mt-8 aspect-4/5 lg:mt-10"
+            className="aspect-4/5 w-full"
           />
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-4.5 left-5 text-[10px] tracking-[0.3em] text-white uppercase"
+          >
+            Yai Beauty / Sosúa
+          </span>
         </div>
 
-        {/* The bio — the tall, scrolling column. */}
         <div>
-          {about.intro.map((paragraph, i) => (
-            <p
-              key={paragraph}
-              className={`reveal max-w-[620px] text-[17px] leading-[1.8] font-light text-secondary ${i > 0 ? "mt-6" : ""}`}
-            >
+          <p className="reveal t-eyebrow eyebrow-rule">{about.eyebrow}</p>
+          <h2 className="reveal t-section-title mt-4.5 mb-6.5 text-balance">{about.heading}</h2>
+          {about.intro.map((paragraph) => (
+            <p key={paragraph} className="reveal mb-4 max-w-[600px] text-[15px] leading-[1.85] text-muted">
               {paragraph}
             </p>
           ))}
-
-          {about.sections.map((chapter) => (
-            <div key={chapter.heading} className="reveal mt-10 border-t border-rule pt-10 lg:mt-14 lg:pt-14">
-              <h3 className="max-w-[420px] font-display text-[26px] leading-[1.2] font-light lg:text-[30px]">
-                {chapter.heading}
-              </h3>
-              <div className="mt-4 max-w-[620px]">
-                {chapter.body.map((paragraph, i) => (
-                  <p
-                    key={paragraph}
-                    className={`text-[16px] leading-[1.8] font-light text-secondary ${i > 0 ? "mt-5" : ""}`}
-                  >
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            </div>
-          ))}
-
-          <p className="reveal mt-10 border-t border-rule pt-10 font-display text-[26px] leading-[1.45] font-light text-balance lg:mt-14 lg:pt-14 lg:text-[32px]">
-            {about.closing}
+          <p className="reveal mt-6.5 font-display text-[38px] leading-none italic">
+            {about.signature}
+            <span className="mt-2 block font-sans text-[10px] tracking-[0.2em] not-italic text-muted uppercase">
+              {about.signatureRole}
+            </span>
           </p>
         </div>
       </div>
+
+      <div className="mt-14 grid gap-7 md:grid-cols-3 md:gap-12 lg:mt-20">
+        {about.sections.map((chapter, i) => {
+          const [first, ...rest] = chapter.body;
+          return (
+            <article key={chapter.heading} className="reveal border-t border-rule-card pt-5">
+              <p className="t-label text-muted">{String(i + 1).padStart(2, "0")}</p>
+              <h3 className="my-3.5 font-display text-[27px] leading-[1.12] text-balance">{chapter.heading}</h3>
+              <p className="text-[14px] leading-[1.8] text-muted">{first}</p>
+              {rest.length > 0 ? (
+                <details className="group">
+                  <summary className="t-button-sm mt-3.5 inline-flex cursor-pointer list-none items-center gap-3 border-b border-ink after:content-['+'] group-open:after:content-['−'] [&::-webkit-details-marker]:hidden">
+                    {about.readMore}
+                  </summary>
+                  {rest.map((paragraph) => (
+                    <p key={paragraph} className="mt-3 text-[14px] leading-[1.8] text-muted">
+                      {paragraph}
+                    </p>
+                  ))}
+                </details>
+              ) : null}
+            </article>
+          );
+        })}
+      </div>
+
+      <blockquote className="reveal mx-auto mt-14 max-w-[860px] text-center font-display text-[length:clamp(28px,3vw,40px)] leading-[1.25] text-balance text-accent italic lg:mt-22">
+        {about.closing}
+      </blockquote>
     </section>
   );
 }

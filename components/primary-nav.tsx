@@ -29,7 +29,7 @@ export function PrimaryNav({ items, label }: Props) {
   return (
     <nav
       aria-label={label}
-      className="relative hidden nav:flex nav:gap-[34px]"
+      className="relative hidden nav:flex nav:gap-5 lg:gap-7"
       onMouseLeave={() => setHovered(null)}
     >
       {items.map((item, i) => {

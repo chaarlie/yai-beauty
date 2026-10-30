@@ -1,39 +1,48 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Design tokens — from the handoff "Design tokens" section.
-   Two background colors for the whole page (cream + blush-50) plus the dark
-   promo block. Hold that line.
+   Design tokens — the palette of mocks/design-proposal.html: warm paper, a
+   brown ink, rose and blush tints. Paper and the blush tints for backgrounds,
+   plus the dark promo block.
 --------------------------------------------------------------------------- */
 @theme {
-  --color-ink: #1a1614;
-  --color-ink-raised: #241d1a;
-  --color-cream: #fbf3ee;
-  --color-blush-50: #f3e3da;
-  --color-blush-300: #e8cfc4;
-  --color-clay: #b98a80;
-  --color-clay-600: #c9a79a;
-  --color-secondary: #4a3f39;
-  --color-tertiary: #5a4c45;
-  --color-muted: #8a756a;
-  --color-eyebrow: #a08574;
+  --color-ink: #302620;
+  --color-ink-raised: #3b2f28;
+  --color-cream: #faf6f1;
+  --color-blush-50: #f1e7df;
+  --color-blush-300: #ead8cd;
+  --color-clay: #b48272;
+  --color-clay-600: #c9a594;
+  /* The headline's accent word. */
+  --color-accent: #a17160;
+  --color-secondary: #4f423b;
+  --color-tertiary: #5f5049;
+  --color-muted: #71625a;
+  --color-eyebrow: #8a6a5c;
   --color-photo-caption: #8a6a5c;
 
+  /* Section tints: treatment and price cards, the first-visit band, offers. */
+  --color-card: #f3ece5;
+  --color-band: #efe7de;
+  --color-offer: #e6d0c3;
+  --color-offer-text: #665247;
+  --color-rule-card: #cbb8aa;
+
   /* Rules — low-alpha ink on light, low-alpha cream on dark. */
-  --color-rule: rgb(26 22 20 / 0.12);
-  --color-rule-stat: rgb(26 22 20 / 0.14);
-  --color-rule-button: rgb(26 22 20 / 0.25);
-  --color-rule-dark: rgb(251 243 238 / 0.16);
+  --color-rule: rgb(48 38 32 / 0.15);
+  --color-rule-stat: rgb(48 38 32 / 0.18);
+  --color-rule-button: rgb(48 38 32 / 0.28);
+  --color-rule-dark: rgb(250 246 241 / 0.16);
 
   /* Text on dark, per the handoff's alpha ladder. */
-  --color-on-dark-body: rgb(251 243 238 / 0.82);
-  --color-on-dark-intro: rgb(251 243 238 / 0.7);
-  --color-on-dark-caption: rgb(251 243 238 / 0.55);
-  --color-on-dark-label: rgb(251 243 238 / 0.5);
-  --color-on-dark-field: rgb(251 243 238 / 0.3);
+  --color-on-dark-body: rgb(250 246 241 / 0.82);
+  --color-on-dark-intro: rgb(250 246 241 / 0.7);
+  --color-on-dark-caption: rgb(250 246 241 / 0.55);
+  --color-on-dark-label: rgb(250 246 241 / 0.5);
+  --color-on-dark-field: rgb(250 246 241 / 0.3);
 
   --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  --font-sans: var(--font-jost), Jost, Helvetica, sans-serif;
+  --font-sans: var(--font-dm-sans), "DM Sans", Helvetica, Arial, sans-serif;
 
   /* Header collapses to a hamburger below 900px (handoff "Responsive"). */
   --breakpoint-nav: 900px;
@@ -101,10 +110,10 @@
 --------------------------------------------------------------------------- */
 @layer components {
   .t-eyebrow {
-    font: 400 12px/1 var(--font-sans);
-    letter-spacing: 0.34em;
+    font: 600 11px/1.4 var(--font-sans);
+    letter-spacing: 0.24em;
     text-transform: uppercase;
-    color: var(--color-eyebrow);
+    color: var(--color-ink);
   }
 
   .t-label {
@@ -119,22 +128,41 @@
     text-transform: uppercase;
   }
 
+  /* An eyebrow led by a short rose rule, the proposal's section opener. */
+  .eyebrow-rule {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eyebrow-rule::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    flex-shrink: 0;
+    background: var(--color-clay);
+  }
+
+  .t-section-title {
+    font: 300 clamp(38px, 4vw, 56px) / 1.08 var(--font-display);
+    letter-spacing: -0.01em;
+  }
+
+  /* Nav and buttons in sentence case, as in the proposal; the small uppercase
+     labels above keep the wide tracking. */
   .t-nav {
-    font: 400 13px/1 var(--font-sans);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
+    font: 400 14px/1 var(--font-sans);
+    letter-spacing: 0.01em;
   }
 
   .t-button {
-    font: 400 13px/1 var(--font-sans);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    font: 500 14px/1.2 var(--font-sans);
+    letter-spacing: 0.01em;
   }
 
   .t-button-sm {
-    font: 400 12px/1 var(--font-sans);
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    font: 500 13px/1.2 var(--font-sans);
+    letter-spacing: 0.01em;
   }
 
   .t-chip {
@@ -144,10 +172,12 @@
     color: var(--color-photo-caption);
   }
 
-  /* Section rhythm. Horizontal padding is 64px at the 1440px canvas width and
-     steps down on smaller viewports, which the prototype never designed. */
+  /* Section rhythm. Backgrounds run full width; content keeps to a centred
+     column of 1160px (1280px from 1450px), as in the proposal, so on a wide
+     screen nothing drifts to the edges. Inside a narrower box (a grid column)
+     the percentage is smaller and the plain padding wins. */
   .section-x {
-    padding-inline: 24px;
+    padding-inline: 20px;
   }
 
   @media (min-width: 768px) {
@@ -158,8 +188,21 @@
 
   @media (min-width: 1024px) {
     .section-x {
-      padding-inline: 64px;
+      padding-inline: max(48px, calc((100% - 1160px) / 2));
     }
+  }
+
+  @media (min-width: 1450px) {
+    .section-x {
+      padding-inline: max(60px, calc((100% - 1280px) / 2));
+    }
+  }
+
+  /* The hero's offer panel: blush, with a soft light where the folder sits. */
+  .promo-panel {
+    background:
+      radial-gradient(70% 42% at 50% 34%, rgb(250 246 241 / 0.85), transparent),
+      var(--color-blush-50);
   }
 }
 

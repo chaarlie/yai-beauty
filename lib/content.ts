@@ -26,6 +26,8 @@ export type Service = {
   display?: { es: string; en: string };
   price: number;
   note?: { es: string; en: string };
+  /** What it does for the skin, one line each; empty until Yasmin writes them. */
+  benefits: { es: string; en: string }[];
   /** Carries a photo row in the catalog. */
   featured?: boolean;
   /**
@@ -117,6 +119,7 @@ function toService(doc: ServiceDoc): Service {
     ...(doc.display ? { display: both(doc.display) } : {}),
     price: doc.price,
     ...(doc.note ? { note: both(doc.note) } : {}),
+    benefits: (doc.benefits ?? []).map(both),
     featured: doc.featured === true,
     ...(doc.image ? { image: imageUrl(doc.image) } : {}),
     ...(doc.imageFocus ? { imageFocus: doc.imageFocus } : {}),
@@ -154,13 +157,13 @@ export async function getFeaturedServices(): Promise<Service[]> {
 }
 
 /**
- * Everything not featured above, grouped in the catalog's own order. Categories
- * with nothing left in them are dropped rather than rendering an empty heading.
+ * The price list: every service on offer, featured ones included, grouped in the
+ * catalog's own order. Categories with nothing in them are dropped rather than
+ * rendering an empty heading.
  */
-export async function getRemainingByCategory(): Promise<{ category: Category; services: Service[] }[]> {
+export async function getServicesByCategory(): Promise<{ category: Category; services: Service[] }[]> {
   const byCategory = new Map<CategoryId, Service[]>();
   for (const service of await getServices()) {
-    if (service.featured === true) continue;
     const bucket = byCategory.get(service.category);
     if (bucket) bucket.push(service);
     else byCategory.set(service.category, [service]);

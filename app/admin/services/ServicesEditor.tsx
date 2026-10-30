@@ -19,6 +19,7 @@ type Row = {
   name: Text;
   display: Text;
   note: Text;
+  benefits: Text[];
   price: string;
   active: boolean;
 };
@@ -43,13 +44,15 @@ function toRow(service: AdminService): Row {
     name: toText(service.name),
     display: toText(service.display),
     note: toText(service.note),
+    benefits: service.benefits.map(toText),
     price: String(service.price),
     active: service.active,
   };
 }
 
-/** What a save would change; equal fingerprints mean the row is untouched. */
-const fingerprint = (row: Row) => JSON.stringify([row.category, row.name, row.display, row.note, row.price.trim(), row.active]);
+/** What a save would change; equal fingerprints mean the row is untouched. A blank benefit isn't a change. */
+const fingerprint = (row: Row) =>
+  JSON.stringify([row.category, row.name, row.display, row.note, row.benefits.filter((b) => !isBlank(b)), row.price.trim(), row.active]);
 
 /** A new row she added but hasn't typed anything into: not a change. */
 const isEmptyNew = (row: Row) => !row.id && isBlank(row.name) && !row.price.trim();
@@ -62,6 +65,8 @@ function payload(row: Row) {
     name: row.name,
     display: isBlank(row.display) ? null : row.display,
     note: isBlank(row.note) ? null : row.note,
+    // Blanks included: the API drops them, and its issues then number the items as the editor does.
+    benefits: row.benefits,
     // An empty or non-numeric price goes as null, and the API names the row.
     price: row.price.trim() === "" ? null : Number(row.price),
     active: row.active,
@@ -74,7 +79,7 @@ const LABEL = "t-label mb-1.5 block text-secondary";
 const ERROR = "mt-1 text-[13px] leading-[1.5] text-[#8a3b2e]";
 
 /** Fields that live behind "Más"; an error in one opens the row. */
-const DETAIL_FIELDS = ["name.en", "display", "note", "category"];
+const DETAIL_FIELDS = ["name.en", "display", "note", "benefits", "category"];
 
 /**
  * The price list as Yasmin edits it: every service by category, its Spanish name
@@ -125,7 +130,7 @@ export default function ServicesEditor({ initial, categories, pricePrefix }: Pro
     added.current += 1;
     const key = `new-${added.current}`;
     const blank = { es: "", en: "" };
-    setRows((all) => [...all, { key, featured: false, category, name: blank, display: blank, note: blank, price: "", active: true }]);
+    setRows((all) => [...all, { key, featured: false, category, name: blank, display: blank, note: blank, benefits: [], price: "", active: true }]);
   }
 
   function discard() {
@@ -176,7 +181,7 @@ export default function ServicesEditor({ initial, categories, pricePrefix }: Pro
     <div className="mt-10">
       <h1 className="font-display text-[40px] leading-[1.1] font-light">Servicios y precios</h1>
       <p className="mt-3 max-w-[620px] text-[15px] leading-[1.6] font-light text-secondary">
-        Cambia nombres y precios aquí y pulsa «Guardar cambios». Para dejar de ofrecer un servicio, desmarca
+        Cambia nombres, precios y beneficios aquí y pulsa «Guardar cambios». Para dejar de ofrecer un servicio, desmarca
         «Mostrar»: desaparece de la lista de precios y de las reservas, pero no se borra.
       </p>
 
@@ -367,6 +372,51 @@ function ServiceRow({
           <Detail label="Nota (inglés)" error={issue("note.en")}>
             <input id={id("note-en")} value={row.note.en} placeholder={row.note.es} onChange={(e) => onText("note", "en", e.target.value)} maxLength={SERVICE_LIMITS.note} className={INPUT} />
           </Detail>
+          <div className="sm:col-span-2">
+            <p className={LABEL}>Beneficios</p>
+            <p className="text-[13px] leading-[1.5] text-muted">
+              Lo que hace el tratamiento, uno en cada casilla, hasta {SERVICE_LIMITS.benefits}. Se ven junto a la foto en los servicios «Con foto».
+            </p>
+            {row.benefits.map((benefit, i) => {
+              const setBenefit = (lang: "es" | "en", value: string) =>
+                onUpdate({ benefits: row.benefits.map((b, j) => (j === i ? { ...b, [lang]: value } : b)) });
+              return (
+                <div key={i} className="mt-3 grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-start">
+                  <div>
+                    <label htmlFor={id(`benefit-${i}-es`)} className="sr-only">
+                      Beneficio {i + 1}
+                    </label>
+                    <textarea id={id(`benefit-${i}-es`)} rows={2} value={benefit.es} onChange={(e) => setBenefit("es", e.target.value)} maxLength={SERVICE_LIMITS.benefit} aria-invalid={Boolean(issue(`benefits.${i}.es`))} className={INPUT} />
+                    {issue(`benefits.${i}.es`) ? <p className={ERROR}>{issue(`benefits.${i}.es`)}</p> : null}
+                  </div>
+                  <div>
+                    <label htmlFor={id(`benefit-${i}-en`)} className="sr-only">
+                      Beneficio {i + 1} en inglés
+                    </label>
+                    <textarea id={id(`benefit-${i}-en`)} rows={2} value={benefit.en} placeholder={benefit.es || "En inglés (opcional)"} onChange={(e) => setBenefit("en", e.target.value)} maxLength={SERVICE_LIMITS.benefit} aria-invalid={Boolean(issue(`benefits.${i}.en`))} className={INPUT} />
+                    {issue(`benefits.${i}.en`) ? <p className={ERROR}>{issue(`benefits.${i}.en`)}</p> : null}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => onUpdate({ benefits: row.benefits.filter((_, j) => j !== i) })}
+                    className="t-button-sm justify-self-start px-1 py-1 text-muted hover:text-ink sm:mt-2"
+                  >
+                    Quitar
+                  </button>
+                </div>
+              );
+            })}
+            {issue("benefits") ? <p className={ERROR}>{issue("benefits")}</p> : null}
+            {row.benefits.length < SERVICE_LIMITS.benefits ? (
+              <button
+                type="button"
+                onClick={() => onUpdate({ benefits: [...row.benefits, { es: "", en: "" }] })}
+                className="t-button-sm mt-3 border-b border-ink px-1 py-2 hover:border-clay"
+              >
+                Añadir beneficio
+              </button>
+            ) : null}
+          </div>
           {row.slug ? (
             <p className="text-[13px] leading-[1.5] text-muted sm:col-span-2">
               Identificador: <span className="font-mono">{row.slug}</span> — no cambia aunque cambies el nombre.
