@@ -21,6 +21,13 @@
   --color-eyebrow: #8a6a5c;
   --color-photo-caption: #8a6a5c;
 
+  /* Section tints: treatment and price cards, the first-visit band, offers. */
+  --color-card: #f3ece5;
+  --color-band: #efe7de;
+  --color-offer: #e6d0c3;
+  --color-offer-text: #665247;
+  --color-rule-card: #cbb8aa;
+
   /* Rules — low-alpha ink on light, low-alpha cream on dark. */
   --color-rule: rgb(48 38 32 / 0.15);
   --color-rule-stat: rgb(48 38 32 / 0.18);
@@ -119,6 +126,26 @@
     font: 400 11px/1 var(--font-sans);
     letter-spacing: 0.2em;
     text-transform: uppercase;
+  }
+
+  /* An eyebrow led by a short rose rule, the proposal's section opener. */
+  .eyebrow-rule {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eyebrow-rule::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    flex-shrink: 0;
+    background: var(--color-clay);
+  }
+
+  .t-section-title {
+    font: 300 clamp(38px, 4vw, 56px) / 1.08 var(--font-display);
+    letter-spacing: -0.01em;
   }
 
   /* Nav and buttons in sentence case, as in the proposal; the small uppercase

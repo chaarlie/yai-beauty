@@ -1,25 +1,30 @@
 import type { Dictionary } from "@/lib/dictionaries";
 
-type Item = { q: string; a: string };
-
 /**
- * Static, as in the prototype. With only three short answers an accordion would
- * add interaction cost for no scroll saved, and every answer stays crawlable.
+ * Questions on the right, each opening in place, as in the proposal. Plain
+ * <details>: no script, and the answers stay in the page for search engines.
  */
-export function FaqList({ items, dict }: { items: Item[]; dict: Dictionary }) {
+export function FaqList({ dict }: { dict: Dictionary }) {
+  const { faq } = dict;
+
   return (
-    <div>
-      <h2 className="reveal mb-7 font-display text-[30px] leading-[1.1] font-light lg:text-[40px]">
-        {dict.faq.heading}
-      </h2>
-      <div className="border-b border-rule">
-        {items.map((item) => (
-          <div key={item.q} className="border-t border-rule py-5">
-            <h3 className="font-display text-[17px] leading-[1.4]">{item.q}</h3>
-            <p className="mt-2 text-[15px] leading-[1.7] font-light text-tertiary">{item.a}</p>
-          </div>
-        ))}
+    <section className="section-x py-14 lg:py-22">
+      <div className="grid gap-7 lg:grid-cols-[0.8fr_1.2fr] lg:gap-22">
+        <div>
+          <p className="reveal t-eyebrow eyebrow-rule">{faq.eyebrow}</p>
+          <h2 className="reveal t-section-title mt-4">{faq.heading}</h2>
+        </div>
+        <div className="reveal">
+          {faq.items.map((item) => (
+            <details key={item.q} className="group border-b border-rule py-5.5 first:border-t">
+              <summary className="flex cursor-pointer list-none justify-between gap-4 text-[16px] leading-[1.5] after:text-accent after:content-['+'] group-open:after:content-['−'] [&::-webkit-details-marker]:hidden">
+                {item.q}
+              </summary>
+              <p className="mt-3.5 text-[14px] leading-[1.7] text-muted">{item.a}</p>
+            </details>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

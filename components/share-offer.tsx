@@ -25,6 +25,8 @@ type Props = {
   fileName: string;
   labels: ShareLabels;
   tone: "light" | "dark";
+  /** Spacing from what's above; a top margin unless the caller sets it. */
+  className?: string;
 };
 
 const TONES = {
@@ -43,7 +45,7 @@ const TONES = {
  * iOS only opens the share sheet straight from a tap, so the image is fetched
  * ahead — on hover, touch or focus — and the tap itself only shares.
  */
-export function ShareOffer({ url, text, storyImagePath, fileName, labels, tone }: Props) {
+export function ShareOffer({ url, text, storyImagePath, fileName, labels, tone, className = "mt-6" }: Props) {
   const [note, setNote] = useState<string | null>(null);
   const image = useRef<Promise<File> | null>(null);
   const style = TONES[tone];
@@ -116,5 +118,5 @@ export function ShareOffer({ url, text, storyImagePath, fileName, labels, tone }
     </>
   );
 
-  return <div className="mt-6">{controls}</div>;
+  return <div className={className}>{controls}</div>;
 }
