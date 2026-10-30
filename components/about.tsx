@@ -20,7 +20,7 @@ export function About({ dict }: { dict: Dictionary }) {
             revealVariant="calm"
             parallax={false}
             focus="50% 35%"
-            className="aspect-4/5 max-h-[520px] w-full lg:aspect-auto lg:h-[560px] lg:max-h-none"
+            className="aspect-4/5 w-full"
           />
           <span
             aria-hidden="true"

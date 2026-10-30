@@ -42,48 +42,53 @@ function FeaturedRow({
   const hasBenefits = service.benefits.length > 0;
 
   return (
-    <article className="grid lg:min-h-[480px] lg:grid-cols-2">
+    // The photo keeps the tall 4:5 crop it had before the cards; the card
+    // stretches to its height rather than cropping it to the card's.
+    <article className="grid lg:grid-cols-2">
       <PhotoSlot
         label={name}
         src={service.image}
         focus={service.imageFocus}
         parallax={service.imageParallax}
-        className={`aspect-4/3 lg:aspect-auto lg:h-full ${flipped ? "lg:order-2" : ""}`}
+        className={`aspect-4/5 sm:aspect-3/2 lg:aspect-4/5 ${flipped ? "lg:order-2" : ""}`}
       />
-      <div className="reveal flex flex-col border border-rule bg-card px-6 py-7 sm:px-8 lg:px-12 lg:py-10">
+      <div className="reveal flex flex-col border border-rule bg-card px-6 py-7 sm:px-8 lg:px-12 lg:py-12 xl:px-16">
         <p className="flex justify-between gap-4 text-[11px] leading-none tracking-[0.2em] text-muted">
           <span>{String(number).padStart(2, "0")}</span>
           <span className="uppercase">{category}</span>
         </p>
-        <h3 className="mt-6 max-w-[420px] font-display text-[32px] leading-[1.08] font-light text-balance lg:mt-8 lg:text-[length:clamp(32px,3vw,42px)]">
-          {name}
-        </h3>
-        <p className="mt-3 font-display text-[28px] leading-none text-accent">
-          {formatPrice(service.price)}{" "}
-          <span className="font-sans text-[12px] tracking-[0.02em] text-muted">{dict.treatments.perSession}</span>
-        </p>
-        {service.note ? <p className="t-label mt-4 text-muted">{service.note[lang]}</p> : null}
-        {hasBenefits ? (
-          <>
-            <p className="t-label mt-7 text-muted">{dict.treatments.benefits}</p>
-            <ul className="mt-3 max-w-[460px]">
-              {service.benefits.map((benefit, i) => (
-                <li
-                  key={i}
-                  className="relative border-b border-rule py-2.5 pl-6.5 text-[14px] leading-[1.6] text-secondary before:absolute before:top-[1.3em] before:left-0 before:h-px before:w-3 before:bg-clay last:border-b-0"
-                >
-                  {benefit[lang]}
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : null}
+        {/* Centred in whatever height the photo gives the card; number on top, link at the foot. */}
+        <div className="py-6 lg:my-auto lg:py-8">
+          <h3 className="max-w-[420px] font-display text-[32px] leading-[1.08] font-light text-balance lg:text-[length:clamp(34px,3.2vw,46px)]">
+            {name}
+          </h3>
+          <p className="mt-3 font-display text-[28px] leading-none text-accent lg:text-[30px]">
+            {formatPrice(service.price)}{" "}
+            <span className="font-sans text-[12px] tracking-[0.02em] text-muted">{dict.treatments.perSession}</span>
+          </p>
+          {service.note ? <p className="t-label mt-4 text-muted">{service.note[lang]}</p> : null}
+          {hasBenefits ? (
+            <>
+              <p className="t-label mt-7 text-muted">{dict.treatments.benefits}</p>
+              <ul className="mt-3 max-w-[460px]">
+                {service.benefits.map((benefit, i) => (
+                  <li
+                    key={i}
+                    className="relative border-b border-rule py-2.5 pl-6.5 text-[14px] leading-[1.6] text-secondary before:absolute before:top-[1.3em] before:left-0 before:h-px before:w-3 before:bg-clay last:border-b-0 lg:text-[15px]"
+                  >
+                    {benefit[lang]}
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
+        </div>
         {/* One link for the whole foot of the card: a big target on a phone. */}
         <a
           href={whatsappUrl(`${dict.treatments.ctaPrefill}${name}`)}
           target="_blank"
           rel="noopener noreferrer"
-          className="group t-button-sm mt-7 flex items-center justify-between gap-4 border-t border-rule-card pt-5 hover:text-inherit lg:mt-auto"
+          className="group t-button-sm flex items-center justify-between gap-4 border-t border-rule-card pt-5 hover:text-inherit"
         >
           {dict.treatments.cta}
           <span
