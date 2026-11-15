@@ -60,7 +60,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         sameAs: [business.instagramUrl],
         address: {
           "@type": "PostalAddress",
-          streetAddress: `${business.address.street}, ${business.address.building}`,
+          streetAddress: `${business.address.building}, ${business.address.street}`,
           addressLocality: business.address.city,
           addressCountry: "DO",
         },

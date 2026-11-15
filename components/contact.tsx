@@ -40,7 +40,7 @@ export function Contact({ business, dict, options }: Props) {
             <p className="mb-4">
               {address.building}
               <br />
-              {address.street}
+              {address.street}, {address.city}
               <br />
               {dict.footer.country}
             </p>
