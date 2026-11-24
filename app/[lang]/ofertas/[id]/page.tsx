@@ -5,7 +5,7 @@ import { getBusiness, getPromoById, getPromos, getServices, serviceName } from "
 import { isLocale } from "@/lib/i18n";
 import { offerPath } from "@/lib/offers";
 import { Contact } from "@/components/contact";
-import { MobileBookBar } from "@/components/mobile-book-bar";
+import { WhatsAppDock } from "@/components/whatsapp-dock";
 import { PromoCard } from "@/components/promo-card";
 import { PromoTeaser } from "@/components/promo-teaser";
 import { SiteFooter } from "@/components/site-footer";
@@ -94,7 +94,7 @@ export default async function OfferPage({ params }: PageProps<"/[lang]/ofertas/[
       </main>
 
       <SiteFooter lang={lang} dict={dict} />
-      <MobileBookBar label={dict.nav.bookLong} prefill={dict.promo.prefill.replace("{offer}", promo.title[lang])} />
+      <WhatsAppDock label={dict.nav.book} prefill={dict.promo.prefill.replace("{offer}", promo.title[lang])} />
     </>
   );
 }
