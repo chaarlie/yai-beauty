@@ -64,8 +64,8 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
 
   return (
     <html lang={lang} className={`${cormorant.variable} ${dmSans.variable}`}>
-      {/* Bottom padding clears the fixed mobile WhatsApp bar. */}
-      <body className="pb-[76px] nav:pb-0">{children}</body>
+      {/* Bottom padding lets the footer scroll clear of the fixed WhatsApp bar (mobile) and box (desktop). */}
+      <body className="pb-[76px] nav:pb-28">{children}</body>
     </html>
   );
 }

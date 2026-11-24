@@ -22,7 +22,7 @@ import { FirstVisit } from "@/components/first-visit";
 import { FaqList } from "@/components/faq-list";
 import { Contact } from "@/components/contact";
 import { SiteFooter } from "@/components/site-footer";
-import { MobileBookBar } from "@/components/mobile-book-bar";
+import { WhatsAppDock } from "@/components/whatsapp-dock";
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -95,7 +95,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       </main>
 
       <SiteFooter lang={lang} dict={dict} />
-      <MobileBookBar label={dict.nav.bookLong} prefill={dict.hero.prefill} />
+      <WhatsAppDock label={dict.nav.book} prefill={dict.hero.prefill} />
     </>
   );
 }
