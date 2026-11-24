@@ -3,6 +3,7 @@ import type { Dictionary } from "@/lib/dictionaries";
 import { imageUrl } from "@/lib/content";
 import { BookingForm, type BookingOption } from "./booking-form";
 import { PhotoSlot } from "./photo-slot";
+import { SocialIcon } from "./social-icon";
 
 type Props = {
   business: Business;
@@ -44,11 +45,28 @@ export function Contact({ business, dict, options }: Props) {
               <br />
               {dict.footer.country}
             </p>
-            <p className="mb-4">{dict.footer.appointments}</p>
+            <p className="mb-5">{dict.footer.appointments}</p>
+            {/* The number is how clients book, so it leads, large and straight to the chat. */}
+            <a
+              href={business.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mb-6 inline-flex items-center gap-4 text-white hover:text-white"
+            >
+              <span className="grid size-12 shrink-0 place-items-center bg-clay transition-colors duration-200 group-hover:bg-[#a8776d]">
+                <SocialIcon name="whatsapp" />
+              </span>
+              <span className="flex flex-col gap-2">
+                <span className="t-label leading-none text-on-dark-label">WhatsApp</span>
+                <span className="border-b border-clay pb-1 font-display text-[clamp(30px,3vw,36px)] leading-none font-light tracking-[0.02em] transition-colors duration-200 group-hover:border-white">
+                  {business.phoneDisplay}
+                </span>
+              </span>
+            </a>
             <ul className="flex flex-col items-start gap-1.5">
               <li>
                 <a href={`tel:${business.phone}`} className="border-b border-on-dark-caption hover:text-white">
-                  {business.phoneDisplay}
+                  {dict.footer.call}
                 </a>
               </li>
               <li>
