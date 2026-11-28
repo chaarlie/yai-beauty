@@ -1,9 +1,7 @@
-import { siteUrl } from "@/lib/site";
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
-import { getDictionary } from "@/lib/dictionaries";
-import { getBusiness } from "@/lib/content";
 import { isLocale, locales } from "@/lib/i18n";
+import { homeMetadata } from "@/lib/metadata";
 import { notFound } from "next/navigation";
 import "../globals.css";
 
@@ -34,26 +32,11 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   const { lang } = await params;
   if (!isLocale(lang)) return {};
 
-  const dict = await getDictionary(lang);
-  const business = getBusiness();
-
   return {
-    metadataBase: siteUrl(),
-    title: dict.meta.title,
-    description: dict.meta.description,
+    ...(await homeMetadata(lang)),
     alternates: {
       canonical: `/${lang}/`,
       languages: { es: "/es/", en: "/en/" },
-    },
-    twitter: { card: "summary_large_image", images: ["/opengraph-image"] },
-    openGraph: {
-      type: "website",
-      url: `/${lang}/`,
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: business.name }],
-      siteName: business.name,
-      locale: lang === "es" ? "es_DO" : "en_US",
-      title: dict.meta.title,
-      description: dict.meta.description,
     },
   };
 }
